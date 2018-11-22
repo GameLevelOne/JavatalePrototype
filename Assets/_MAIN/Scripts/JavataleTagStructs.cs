@@ -24,8 +24,16 @@ namespace Javatale.Prototype
 		
 		public int AttackIndex;
 	}
-
 	public class PlayerComponent : ComponentDataWrapper<Player> {}
+
+	//PROJECTILE
+	public struct Projectile : IComponentData
+	{
+		// public int StartAnimationToggle;
+		// public int EndAnimationToggle;
+		//
+	}
+	public class ProjectileComponent : ComponentDataWrapper<Projectile> {}
     
 	//BEE
 	public struct Bee : IComponentData
@@ -33,6 +41,5 @@ namespace Javatale.Prototype
 		public BeeAnimationState State;
 		public int AnimationToggle;
 	}
-
 	public class BeeComponent : ComponentDataWrapper<Bee> {}
 }

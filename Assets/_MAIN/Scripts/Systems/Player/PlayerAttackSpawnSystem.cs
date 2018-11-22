@@ -43,6 +43,7 @@ namespace Javatale.Prototype
 				MoveDirection attackInitMoveDir = playerAttackSpawnData.moveDir;
 				FaceDirection attackInitFaceDir = playerAttackSpawnData.faceDir;
 				Parent attackParent = playerAttackSpawnData.parent;
+				Projectile attackProjectile= playerAttackSpawnData.projectile;
 				int attackIndex = playerAttackSpawnData.attackIndex;
 
 				commandBuffer.AddComponent(playerAttackEntity, attackInitPos);
@@ -50,6 +51,7 @@ namespace Javatale.Prototype
 				commandBuffer.AddComponent(playerAttackEntity, attackInitMoveDir);
 				commandBuffer.AddComponent(playerAttackEntity, attackInitFaceDir);
 				commandBuffer.AddComponent(playerAttackEntity, attackParent);
+				commandBuffer.AddComponent(playerAttackEntity, attackProjectile);
 				commandBuffer.AddSharedComponent(playerAttackEntity, new MeshInstanceRenderer {
 					mesh = playerAttackMesh,
 					material = playerAttackMaterials[attackIndex]
@@ -91,14 +93,14 @@ namespace Javatale.Prototype
 					emptyProjectileAnimIndexes.RemoveAt(0);
 
 					//Set projectile list by its empty index
-					listProjectileAnim[emptyProjectileAnimIndex] = new EntryProjectileAnim(attackFaceDirIndex, attackFaceValue, 1, 0);
+					listProjectileAnim[emptyProjectileAnimIndex] = new EntryProjectileAnim(attackFaceDirIndex, attackFaceValue, 1, 0); //START 1, END 0
 
 					//Set current index by its empty index
 					currentAnimListIndex = emptyProjectileAnimIndex;
 				}
 				else 
 				{
-					listProjectileAnim.Add(new EntryProjectileAnim(attackFaceDirIndex, attackFaceValue, 1, 0));
+					listProjectileAnim.Add(new EntryProjectileAnim(attackFaceDirIndex, attackFaceValue, 1, 0)); //START 1, END 0
 					
 					currentAnimListIndex = listProjectileAnim.Count-1;
 				}

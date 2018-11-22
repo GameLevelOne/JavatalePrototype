@@ -119,6 +119,7 @@ namespace Javatale.Prototype
 		public MoveDirection moveDir;
 		public FaceDirection faceDir;
         public Parent parent;
+        public Projectile projectile;
         public int attackIndex;
 	}
 }
