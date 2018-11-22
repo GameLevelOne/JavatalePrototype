@@ -27,6 +27,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1176888448441170
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4613618615561124}
+  - component: {fileID: 54289446251306154}
+  - component: {fileID: 136396233807691738}
+  - component: {fileID: 114588310170708896}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1499087160574692
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,6 +58,7 @@ GameObject:
   - component: {fileID: 114342694092530332}
   - component: {fileID: 114464707782508466}
   - component: {fileID: 95854282769582188}
+  - component: {fileID: 114593623616645954}
   m_Layer: 0
   m_Name: Player Sprite
   m_TagString: Untagged
@@ -58,8 +77,22 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4913344097777326}
+  - {fileID: 4613618615561124}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4613618615561124
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1176888448441170}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4120429324001598}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4913344097777326
 Transform:
@@ -68,12 +101,27 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1062952201004018}
   m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4120429324001598}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
+--- !u!54 &54289446251306154
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1176888448441170}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!95 &95854282769582188
 Animator:
   serializedVersion: 3
@@ -107,6 +155,10 @@ MonoBehaviour:
   animationEvent: {fileID: 114464707782508466}
   currentDirIndex: 0
   currentState: 0
+  currentFaceDirValue:
+    x: 0
+    y: 0
+    z: 0
   isFinishAnyAnimation: 1
   isFinishAttackAnimation: 1
   isCheckOnStartAnimation: 0
@@ -124,7 +176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10287ba395117d41b0d6f7583f50dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 95854282769582188}
 --- !u!114 &114560925217324048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,6 +187,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114588310170708896
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1176888448441170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 159ccf369bdf12a49bb922b349a6ee99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114593623616645954
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1499087160574692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0ee42ba13b25c49a5cda128ba35862, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderEvent: {fileID: 114588310170708896}
 --- !u!114 &114703247230076632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -149,6 +223,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PosIndex: 0
   AnimIndex: 0
+--- !u!136 &136396233807691738
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1176888448441170}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 4
+  m_Direction: 1
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!212 &212247541925781354
 SpriteRenderer:
   m_ObjectHideFlags: 1

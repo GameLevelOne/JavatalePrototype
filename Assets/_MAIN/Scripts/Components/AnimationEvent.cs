@@ -1,45 +1,49 @@
 ﻿using UnityEngine;
 
-public class AnimationEvent : MonoBehaviour {
-	public delegate void AnimationControl();
-	public event AnimationControl OnStartAnimation;
-	public event AnimationControl OnSpawnSomethingOnAnimation;
-	public event AnimationControl OnEndSpecificAnimation;
-	public event AnimationControl OnEndAnimation;
-
-	// public Animator animator;
-
-	// bool isAnimating = false;
-
-	void StartAnimation () 
+namespace Javatale.Prototype
+{
+	public class AnimationEvent : MonoBehaviour 
 	{
-		if (OnStartAnimation != null) 
+		public delegate void AnimationControl();
+		public event AnimationControl OnStartAnimation;
+		public event AnimationControl OnSpawnSomethingOnAnimation;
+		public event AnimationControl OnEndSpecificAnimation;
+		public event AnimationControl OnEndAnimation;
+
+		// public Animator animator;
+
+		// bool isAnimating = false;
+
+		void StartAnimation () 
 		{
-			OnStartAnimation();
+			if (OnStartAnimation != null) 
+			{
+				OnStartAnimation();
+			}
+		} 
+
+		void SpawnSomethingOnAnimation ()
+		{
+			if (OnSpawnSomethingOnAnimation != null)
+			{
+				OnSpawnSomethingOnAnimation();
+			}
 		}
-	} 
 
-	void SpawnSomethingOnAnimation ()
-	{
-		if (OnSpawnSomethingOnAnimation != null)
+		void EndSpecificAnimation ()
 		{
-			OnSpawnSomethingOnAnimation();
+			if (OnEndSpecificAnimation != null)
+			{
+				OnEndSpecificAnimation();
+			}
 		}
-	}
 
-	void EndSpecificAnimation ()
-	{
-		if (OnEndSpecificAnimation != null)
+		void EndAnimation ()
 		{
-			OnEndSpecificAnimation();
-		}
-	}
-
-	void EndAnimation ()
-	{
-		if (OnEndAnimation != null)
-		{
-			OnEndAnimation();
+			if (OnEndAnimation != null)
+			{
+				OnEndAnimation();
+			}
 		}
 	}
 }

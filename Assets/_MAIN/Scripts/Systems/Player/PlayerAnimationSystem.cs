@@ -65,6 +65,11 @@ namespace Javatale.Prototype
 							commandBuffer.AddComponent(animEntity, new AnimationPlayerMoveRun{});
 						
 							break;
+						case 3:
+							//
+							GameDebug.Log("ADD COMPONENT GET HURT");
+						
+							break;
 						case 21:
 							commandBuffer.AddComponent(animEntity, new AnimationPlayerAttack1{});
 

@@ -24,8 +24,8 @@ namespace Javatale.Prototype
 		{
 			EntityCommandBuffer commandBuffer = PostUpdateCommands;
 			JavataleSettings settings = GameManager.settings;
-			Mesh playerAttackMesh = settings.playerAttackMesh;
-			Material[] playerAttackMaterials = settings.playerAttackMaterials;
+			// Mesh playerAttackMesh = settings.playerAttackMesh;
+			// Material[] playerAttackMaterials = settings.playerAttackMaterials;
            	List<float3> listPos = GameManager.entitiesPos;
            	List<EntryProjectileAnim> listProjectileAnim = GameManager.entitiesProjectileAnim;
 			   

@@ -30,13 +30,13 @@ namespace Javatale.Prototype
 		}
 		[InjectAttribute] private ChildData childData;
 
-		float deltaTime;
+		// float deltaTime;
 
 		protected override void OnUpdate () 
 		{
-			deltaTime = Time.deltaTime;
+			// deltaTime = Time.deltaTime;
 			EntityCommandBuffer commandBuffer = PostUpdateCommands;
-           	List<float3> listPos = GameManager.entitiesPos;
+           	// List<float3> listPos = GameManager.entitiesPos;
            	List<EntryProjectileAnim> listProjectileAnim = GameManager.entitiesProjectileAnim;
 			List<int> emptyPosIndexes = GameManager.emptyPosIndexes;
 			List<int> emptyProjectileAnimIndexes = GameManager.emptyProjectileAnimIndexes;
