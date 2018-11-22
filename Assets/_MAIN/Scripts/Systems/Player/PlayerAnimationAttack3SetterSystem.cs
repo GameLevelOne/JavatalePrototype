@@ -33,6 +33,8 @@ namespace Javatale.Prototype
 				FaceDirection faceDir = parentData.FaceDirection[i];
 
 				commandBuffer.RemoveComponent<AnimationPlayerAttack3>(animEntity);
+				commandBuffer.RemoveComponent<PlayerInputDirection>(animEntity);
+				commandBuffer.RemoveComponent<PlayerInputAttack>(animEntity);
                 
 				//SET LIST
 				// int dirIndex = faceDir.dirIndex;
@@ -47,7 +49,8 @@ namespace Javatale.Prototype
 				// listAnim[parent.AnimIndex] = new EntryPlayerAnim(dirIndex, faceDirValue, state, 23, endAnimToggle);
 				listAnim[parent.AnimIndex] = entryPlayerAnim;
 
-				//SET TO PLAYER (PARENT)	
+				//SET TO PLAYER (PARENT)
+				player.AnimationToggleValue = 1;		
 				player.State = state;
 				parentData.Player[i] = player;
 			}

@@ -47,8 +47,10 @@ namespace Javatale.Prototype
         public GameObject playerChild;
         public GameObject beeEnemyChild;
 
-        [HeaderAttribute("Index = 0 : Attack 1, 1 : Attack 2, 2 : Attack 3")]
+        [HeaderAttribute("Index = 0 : Down, 1 : Left, 2 : Up, 3 : Right")]
         public GameObject[] playerAttack1Childs;
+        public GameObject[] playerAttack2Childs;
+        public GameObject[] playerAttack3Childs;
     }
 
 	public enum PlayerAnimationState

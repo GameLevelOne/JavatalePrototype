@@ -65,10 +65,10 @@ namespace Javatale.Prototype
 				ChildComponent childComponent = childData.ChildComponent[j];
 				
 				int childAnimIndex = childComponent.AnimIndex;
-				float destroyDuration = playerAttackComponent.duration;
-				float destroyTimer = playerAttackComponent.timer;
+				bool isInitDestroyed = playerAttackComponent.isInitDestroyed;
+				bool isDestroyed = playerAttackComponent.isDestroyed;
 
-				if (destroyTimer >= destroyDuration)
+				if (isInitDestroyed && !isDestroyed)
 				{
 					//Add pos index to List of empty pos index
 					emptyPosIndexes.Add(childComponent.PosIndex);
@@ -76,7 +76,6 @@ namespace Javatale.Prototype
 					//Add anim index to List of empty anim index
 					emptyProjectileAnimIndexes.Add(childComponent.AnimIndex);
 
-					// GameDebug.Log("childComponent.PosIndex "+childComponent.PosIndex+"\n listPos "+listPos[childComponent.PosIndex]);
 					GameObjectEntity.Destroy(playerAttackComponent.gameObject);
 					UpdateInjectedComponentGroups();
 
@@ -86,10 +85,7 @@ namespace Javatale.Prototype
 					listProjectileAnim[childAnimIndex] = entryProjectileAnim;
 
 					// foreach (int a in emptyPosIndexes) GameDebug.Log(a);
-				}
-				else
-				{
-					playerAttackComponent.timer += deltaTime;
+					isDestroyed = true;
 				}
 			}
 		}

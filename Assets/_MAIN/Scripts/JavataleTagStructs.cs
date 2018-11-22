@@ -21,6 +21,7 @@ namespace Javatale.Prototype
 		/// </summary>
 		public int StartAnimationToggle;
 		public int EndAnimationToggle;
+		public int AnimationToggleValue;
 		
 		public int AttackIndex;
 	}

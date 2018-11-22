@@ -52,10 +52,10 @@ namespace Javatale.Prototype
 				commandBuffer.AddComponent(playerAttackEntity, attackInitFaceDir);
 				commandBuffer.AddComponent(playerAttackEntity, attackParent);
 				commandBuffer.AddComponent(playerAttackEntity, attackProjectile);
-				commandBuffer.AddSharedComponent(playerAttackEntity, new MeshInstanceRenderer {
-					mesh = playerAttackMesh,
-					material = playerAttackMaterials[attackIndex]
-				});
+				// commandBuffer.AddSharedComponent(playerAttackEntity, new MeshInstanceRenderer {
+				// 	mesh = playerAttackMesh,
+				// 	material = playerAttackMaterials[attackIndex]
+				// });
 
 				#region POS LIST
 				float3 attackPosValue = attackInitPos.Value;
@@ -111,7 +111,22 @@ namespace Javatale.Prototype
 					AnimIndex = currentAnimListIndex
 				});
 
-				GameObject attackGO = GameObject.Instantiate(settings.playerAttack1Childs[attackIndex], attackPosValue, quaternion.identity);
+				//=====ATTACK'S CHILD GAMEOBJECT=====
+				GameObject attackGO = null;
+
+				switch (attackIndex)
+				{
+					case 1:
+						attackGO = GameObject.Instantiate(settings.playerAttack2Childs[attackFaceDirIndex], attackPosValue, quaternion.identity);
+						break;
+					case 2:
+						attackGO = GameObject.Instantiate(settings.playerAttack3Childs[attackFaceDirIndex], attackPosValue, quaternion.identity);
+						break;
+					default: //case 0
+						attackGO = GameObject.Instantiate(settings.playerAttack1Childs[attackFaceDirIndex], attackPosValue, quaternion.identity);
+						break;
+				}
+				
 				attackGO.GetComponent<ChildComponent>().PosIndex = currentPosListIndex;
 				attackGO.GetComponent<ChildComponent>().AnimIndex = currentAnimListIndex;
 

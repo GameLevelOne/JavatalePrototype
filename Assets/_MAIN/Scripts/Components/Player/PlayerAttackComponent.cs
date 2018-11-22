@@ -6,9 +6,25 @@ namespace Javatale.Prototype
 {
 	public class PlayerAttackComponent : MonoBehaviour 
 	{
-		public float duration;
+		public AnimationEvent animationEvent;
 
 		[HeaderAttribute("Current")]
-		public float timer;
+		public bool isInitDestroyed = false;
+		public bool isDestroyed = false;
+		
+		void OnEnable ()
+		{
+			animationEvent.OnEndAnimation += OnEndAnimation;
+		}
+
+		void OnDisable ()
+		{
+			animationEvent.OnEndAnimation -= OnEndAnimation;
+		}
+
+		void OnEndAnimation ()
+		{
+			isInitDestroyed = true;
+		}
 	}
 }

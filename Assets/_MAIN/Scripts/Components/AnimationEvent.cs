@@ -7,7 +7,7 @@ public class AnimationEvent : MonoBehaviour {
 	public event AnimationControl OnEndSpecificAnimation;
 	public event AnimationControl OnEndAnimation;
 
-	public Animator animator;
+	// public Animator animator;
 
 	// bool isAnimating = false;
 

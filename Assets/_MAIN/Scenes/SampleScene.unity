@@ -388,7 +388,7 @@ MonoBehaviour:
   worldToCameraRotation: {x: 40, y: 0, z: 0}
   maxPlayerAttackIndex: 2
   playerMoveSpeed: 5
-  maxEnemy: 0
+  maxEnemy: 10
   enemyMoveSpeed: 3
   enemyMinPatrolCooldown: 5
   enemyMaxPatrolCooldown: 10
@@ -408,10 +408,20 @@ MonoBehaviour:
   beeEnemyChild: {fileID: 1000424113539262, guid: c0b519648e197ae4ab1c0c37c1007e56,
     type: 2}
   playerAttack1Childs:
+  - {fileID: 1004815682617724, guid: 24ec0e6d9f3cd9842badfc2f9a6f1d62, type: 2}
+  - {fileID: 1448885816363944, guid: 61146bbf49523e64aa02fddb97010566, type: 2}
   - {fileID: 1004767093547920, guid: 9f2b7aa66e81b9243bc722a8f809db61, type: 2}
-  - {fileID: 1004767093547920, guid: 9f2b7aa66e81b9243bc722a8f809db61, type: 2}
-  - {fileID: 1004767093547920, guid: 9f2b7aa66e81b9243bc722a8f809db61, type: 2}
-  - {fileID: 1004767093547920, guid: 9f2b7aa66e81b9243bc722a8f809db61, type: 2}
+  - {fileID: 1061259482049566, guid: a2bd4ab61d6ef6d4dbf5ddd86b524c00, type: 2}
+  playerAttack2Childs:
+  - {fileID: 1340365128160268, guid: dc223562bc5eba049b10a32bdbc84ef8, type: 2}
+  - {fileID: 1448885816363944, guid: 4982bbbf7ec0e344b9a0514988053b95, type: 2}
+  - {fileID: 1004767093547920, guid: 2299c67e6e3e1f6439260d0351bda748, type: 2}
+  - {fileID: 1061259482049566, guid: 25fca95d8dd95ba4babc3bc0be0d043e, type: 2}
+  playerAttack3Childs:
+  - {fileID: 1561511853255032, guid: 4a399340837204047aa925d84a9e7db8, type: 2}
+  - {fileID: 1448885816363944, guid: f662365a03dc0ea4b9fdf8bdac039aba, type: 2}
+  - {fileID: 1004767093547920, guid: 7ee85164cd647ec4bac26e02a91250e3, type: 2}
+  - {fileID: 1061259482049566, guid: 521486bedb90de84bb91f980e20bcf08, type: 2}
 --- !u!4 &1575472358
 Transform:
   m_ObjectHideFlags: 0

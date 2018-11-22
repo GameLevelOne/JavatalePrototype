@@ -49,6 +49,7 @@ namespace Javatale.Prototype
 				// GameDebug.Log("Set : "+listAnim[parent.AnimIndex].State+"\n StartAnimationToggle : "+listAnim[parent.AnimIndex].StartAnimationToggle);
 
 				//SET TO PLAYER (PARENT)	
+				player.AttackIndex = 0;		
 				player.State = state;
 				parentData.Player[i] = player;
 			}

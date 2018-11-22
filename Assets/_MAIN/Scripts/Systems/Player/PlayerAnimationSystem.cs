@@ -42,12 +42,13 @@ namespace Javatale.Prototype
 
 				// PlayerAnimationState state = player.State;
 				// Vector3 direction = moveDir.Value;
+				int animIndex = parent.AnimIndex;
+				EntryPlayerAnim entryPlayerAnim = listAnim[animIndex];
+				
 				int playerStartAnimToggle = player.StartAnimationToggle;
 				int playerEndAnimToggle = player.EndAnimationToggle;
-				int animIndex = parent.AnimIndex;
-
-				EntryPlayerAnim entryPlayerAnim = listAnim[animIndex];
-				PlayerAnimationState state = player.State;
+				int playerAnimToggleValue = player.AnimationToggleValue;
+				// PlayerAnimationState state = player.State;
 				int dirIndex = faceDir.dirIndex;
 				float3 faceDirValue = faceDir.Value;
 
@@ -66,8 +67,6 @@ namespace Javatale.Prototype
 							break;
 						case 21:
 							commandBuffer.AddComponent(animEntity, new AnimationPlayerAttack1{});
-							commandBuffer.RemoveComponent<PlayerInputDirection>(animEntity);
-							commandBuffer.RemoveComponent<PlayerInputAttack>(animEntity);
 
 							moveDir.Value = float3Zero;
 							data.MoveDirection[i] = moveDir;
@@ -75,8 +74,6 @@ namespace Javatale.Prototype
 							break;
 						case 22:
 							commandBuffer.AddComponent(animEntity, new AnimationPlayerAttack2{});
-							commandBuffer.RemoveComponent<PlayerInputDirection>(animEntity);
-							commandBuffer.RemoveComponent<PlayerInputAttack>(animEntity);
 
 							moveDir.Value = float3Zero;
 							data.MoveDirection[i] = moveDir;
@@ -84,8 +81,6 @@ namespace Javatale.Prototype
 							break;
 						case 23:
 							commandBuffer.AddComponent(animEntity, new AnimationPlayerAttack3{});
-							commandBuffer.RemoveComponent<PlayerInputDirection>(animEntity);
-							commandBuffer.RemoveComponent<PlayerInputAttack>(animEntity);
 
 							moveDir.Value = float3Zero;
 							data.MoveDirection[i] = moveDir;
@@ -110,16 +105,14 @@ namespace Javatale.Prototype
 #endregion 
 
 #region END ANIMATION
-				if (playerEndAnimToggle != 0) 
+				else if (playerEndAnimToggle != 0) 
 				{
 					switch (playerEndAnimToggle) 
 					{
-						case 1:
-							commandBuffer.AddComponent(animEntity, new AnimationPlayerIdleStand{});
+						case 1:				
+							if (playerAnimToggleValue == 0)
+								commandBuffer.AddComponent(animEntity, new AnimationPlayerIdleStand{});
 							
-							player.AttackIndex = 0;
-							data.Player[i] = player;
-
 							break;
 						case 2:
 							commandBuffer.AddComponent(animEntity, new PlayerInputDirection{});
@@ -127,14 +120,15 @@ namespace Javatale.Prototype
 
 							int attackIndex = player.AttackIndex >= maxPlayerAttackIndex ? 0 : player.AttackIndex+1;
 							player.AttackIndex = attackIndex;
-							data.Player[i] = player;
-
+							player.AnimationToggleValue = 0;
+							// data.Player[i] = player;
+							
 							break;
 					}
                 
 					//SET LIST
 					// int startAnimToggle = listAnim[animIndex].StartAnimationToggle;
-					entryPlayerAnim.State = state;
+					// entryPlayerAnim.State = state;
 					entryPlayerAnim.EndAnimationToggle = 0;
 
 					// listAnim[animIndex] = new EntryPlayerAnim(dirIndex, faceDirValue, state, startAnimToggle, 0);
