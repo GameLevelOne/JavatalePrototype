@@ -210,6 +210,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderEvent: {fileID: 114588310170708896}
+  entityGO: {fileID: 114560925217324048}
+  isInitDamaged: 0
 --- !u!114 &114703247230076632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -223,6 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PosIndex: 0
   AnimIndex: 0
+  AnimStateIndex: 0
 --- !u!136 &136396233807691738
 CapsuleCollider:
   m_ObjectHideFlags: 1
