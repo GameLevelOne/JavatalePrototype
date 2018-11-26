@@ -68,52 +68,6 @@ namespace Javatale.Prototype
         MOVE_FLY
     }
 
-    public struct EntryPlayerAnim
-    {
-        public int DirIndex; //USELESS
-        public float3 FaceDirValue;
-        public PlayerAnimationState State;
-        public int StartAnimationToggle;
-        public int EndAnimationToggle;
-
-        public EntryPlayerAnim (int dirIndex, float3 faceDirValue, PlayerAnimationState state, int startAnimToggle, int endAnimToggle)
-        {
-            DirIndex = dirIndex;
-            FaceDirValue = faceDirValue;
-            State = state;
-            StartAnimationToggle = startAnimToggle;
-            EndAnimationToggle = endAnimToggle;
-        }
-    }
-
-    public struct EntryProjectileAnim
-    {
-        public int DirIndex; //USELESS
-        public float3 FaceDirValue;
-        public int StartAnimationToggle;
-        public int EndAnimationToggle;
-
-        public EntryProjectileAnim (int dirIndex, float3 faceDirValue, int startAnimToggle, int endAnimToggle)
-        {
-            DirIndex = dirIndex;
-            FaceDirValue = faceDirValue;
-            StartAnimationToggle = startAnimToggle;
-            EndAnimationToggle = endAnimToggle;
-        }
-    }
-
-    public struct EntryBeeAnim
-    {
-        public int DirIndex;
-        public BeeAnimationState State;
-
-        public EntryBeeAnim (int dirIndex, BeeAnimationState state)
-        {
-            DirIndex = dirIndex;
-            State = state;
-        }
-    }
-
 	public struct PlayerAttackSpawnData : IComponentData
 	{
 		public Position pos;
@@ -124,4 +78,88 @@ namespace Javatale.Prototype
         public Projectile projectile;
         public int attackIndex;
 	}
+
+    public struct EntryAnimation 
+    {
+        public int DirIndex; //USELESS
+        public float3 FaceDirValue;
+        public int StartAnimationToggle;
+        public int EndAnimationToggle;
+
+        public EntryAnimation (int dirIndex, float3 faceDirValue, int startAnimToggle, int endAnimToggle)
+        {
+            DirIndex = dirIndex;
+            FaceDirValue = faceDirValue;
+            StartAnimationToggle = startAnimToggle;
+            EndAnimationToggle = endAnimToggle;
+        }
+    }
+
+    public struct EntryPlayerAnimState
+    {
+        public PlayerAnimationState State;
+
+        public EntryPlayerAnimState (PlayerAnimationState state)
+        {
+            State = state;
+        }
+    }
+
+    public struct EntryBeeAnimState
+    {
+        public BeeAnimationState State;
+
+        public EntryBeeAnimState (BeeAnimationState state)
+        {
+            State = state;
+        }
+    }
+
+#region OLD
+    // public struct EntryPlayerAnim
+    // {
+    //     public int DirIndex; //USELESS
+    //     public float3 FaceDirValue;
+    //     public PlayerAnimationState State;
+    //     public int StartAnimationToggle;
+    //     public int EndAnimationToggle;
+
+    //     public EntryPlayerAnim (int dirIndex, float3 faceDirValue, PlayerAnimationState state, int startAnimToggle, int endAnimToggle)
+    //     {
+    //         DirIndex = dirIndex;
+    //         FaceDirValue = faceDirValue;
+    //         State = state;
+    //         StartAnimationToggle = startAnimToggle;
+    //         EndAnimationToggle = endAnimToggle;
+    //     }
+    // }
+
+    // public struct EntryProjectileAnim
+    // {
+    //     public int DirIndex; //USELESS
+    //     public float3 FaceDirValue;
+    //     public int StartAnimationToggle;
+    //     public int EndAnimationToggle;
+
+    //     public EntryProjectileAnim (int dirIndex, float3 faceDirValue, int startAnimToggle, int endAnimToggle)
+    //     {
+    //         DirIndex = dirIndex;
+    //         FaceDirValue = faceDirValue;
+    //         StartAnimationToggle = startAnimToggle;
+    //         EndAnimationToggle = endAnimToggle;
+    //     }
+    // }
+
+    // public struct EntryBeeAnim
+    // {
+    //     public int DirIndex;
+    //     public BeeAnimationState State;
+
+    //     public EntryBeeAnim (int dirIndex, BeeAnimationState state)
+    //     {
+    //         DirIndex = dirIndex;
+    //         State = state;
+    //     }
+    // }
+#endregion
 }

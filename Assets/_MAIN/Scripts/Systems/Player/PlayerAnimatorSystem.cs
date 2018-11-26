@@ -29,7 +29,9 @@ namespace Javatale.Prototype
 		
 		protected override void OnUpdate () 
 		{
-            List<EntryPlayerAnim> listAnim = GameManager.entitiesPlayerAnim;
+			List<EntryAnimation> listAnim = GameManager.entitiesAnimation;
+            // List<EntryPlayerAnim> listAnim = GameManager.entitiesPlayerAnim;
+			List<EntryPlayerAnimState> listPlayerAnimState = GameManager.entitiesPlayerAnimState;
 
 			for (int i=0; i<parentData.Length; i++)
 			{
@@ -37,9 +39,9 @@ namespace Javatale.Prototype
 				Player player = parentData.Player[i];
 
 				int parentIndex = parent.AnimIndex;
-				EntryPlayerAnim entryPlayerAnim = listAnim[parentIndex];
+				EntryAnimation entryAnim = listAnim[parentIndex];
 
-				int endAnimToggle = entryPlayerAnim.EndAnimationToggle;
+				int endAnimToggle = entryAnim.EndAnimationToggle;
 				int currentEndAnimToggle = player.EndAnimationToggle;
 
 				if (endAnimToggle != currentEndAnimToggle) 
@@ -58,41 +60,36 @@ namespace Javatale.Prototype
 				PlayerAnimatorComponent anim = childData.Animator[j];
 
 				int childIndex = child.AnimIndex;
-				EntryPlayerAnim entryPlayerAnim = listAnim[childIndex];
+				EntryAnimation entryAnim = listAnim[childIndex];
+				float3 faceDirValue = entryAnim.FaceDirValue;
 
-				float3 faceDirValue = entryPlayerAnim.FaceDirValue;
-				PlayerAnimationState state = entryPlayerAnim.State;
+				int childAnimStateIndex = child.AnimStateIndex;
+				EntryPlayerAnimState entryPlayerAnimState = listPlayerAnimState[childAnimStateIndex];
+				PlayerAnimationState state = entryPlayerAnimState.State;
 
 #region PLAY & STOP ANIMATION
-				// PlayerAnimationState currentState = anim.currentState;
-				int playerStartAnimToggle = entryPlayerAnim.StartAnimationToggle;
-				// int currentPlayerStartAnimToggle = anim.currentPlayerStartAnimToggle;
+				int playerStartAnimToggle = entryAnim.StartAnimationToggle;
 
 				if (playerStartAnimToggle != 0)
 				{
                     anim.animator.Play(state.ToString());
 
 					anim.currentState = state;
-					// anim.currentPlayerStartAnimToggle = playerStartAnimToggle;
-					entryPlayerAnim.StartAnimationToggle = 0;
-					listAnim[childIndex] = entryPlayerAnim;
+					entryAnim.StartAnimationToggle = 0;
+					listAnim[childIndex] = entryAnim;
 				}
 				else 
 				{
-					// int startAnimToggle = listAnim[childIndex].StartAnimationToggle;
-
 					if (anim.isCheckOnEndAnimation) {
-						entryPlayerAnim.EndAnimationToggle = 1;
-						// listAnim[childIndex] = new EntryPlayerAnim(dirIndex, faceDirValue, state, startAnimToggle, 1);
-						listAnim[childIndex] = entryPlayerAnim;
+						entryAnim.EndAnimationToggle = 1;
+						listAnim[childIndex] = entryAnim;
 
 						anim.isCheckOnEndAnimation = false;
 					}
 
 					if (anim.isCheckOnEndSpecificAnimation) {
-						entryPlayerAnim.EndAnimationToggle = 2;
-						// listAnim[childIndex] = new EntryPlayerAnim(dirIndex, faceDirValue, state, startAnimToggle, 2);
-						listAnim[childIndex] = entryPlayerAnim;
+						entryAnim.EndAnimationToggle = 2;
+						listAnim[childIndex] = entryAnim;
 
 						anim.isCheckOnEndSpecificAnimation = false;
 					}
@@ -100,7 +97,7 @@ namespace Javatale.Prototype
 #endregion
 				
 #region DIRECTION
-				int dirIndex = entryPlayerAnim.DirIndex;
+				int dirIndex = entryAnim.DirIndex;
 				int currentDirIndex = anim.currentDirIndex;
 				
 				if (dirIndex != currentDirIndex) 

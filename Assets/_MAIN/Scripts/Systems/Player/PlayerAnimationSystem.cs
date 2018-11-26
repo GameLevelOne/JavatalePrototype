@@ -29,7 +29,8 @@ namespace Javatale.Prototype
 		protected override void OnUpdate () 
 		{
 			EntityCommandBuffer commandBuffer = PostUpdateCommands;
-            List<EntryPlayerAnim> listAnim = GameManager.entitiesPlayerAnim;
+			List<EntryAnimation> listAnim = GameManager.entitiesAnimation;
+            // List<EntryPlayerAnim> listAnim = GameManager.entitiesPlayerAnim;
 			int maxPlayerAttackIndex = GameManager.settings.maxPlayerAttackIndex;
 
 			for (int i=0; i<data.Length; i++)
@@ -43,14 +44,12 @@ namespace Javatale.Prototype
 				// PlayerAnimationState state = player.State;
 				// Vector3 direction = moveDir.Value;
 				int animIndex = parent.AnimIndex;
-				EntryPlayerAnim entryPlayerAnim = listAnim[animIndex];
+				EntryAnimation entryAnim = listAnim[animIndex];
 				
 				int playerStartAnimToggle = player.StartAnimationToggle;
 				int playerEndAnimToggle = player.EndAnimationToggle;
 				int playerAnimToggleValue = player.AnimationToggleValue;
 				// PlayerAnimationState state = player.State;
-				int dirIndex = faceDir.dirIndex;
-				float3 faceDirValue = faceDir.Value;
 
 #region START ANIMATION
 				if (playerStartAnimToggle != 0) 
@@ -93,15 +92,18 @@ namespace Javatale.Prototype
 							break;
 					}
                 
+					int dirIndex = faceDir.dirIndex;
+					float3 faceDirValue = faceDir.Value;
+					
 					//SET LIST
 					// int endAnimToggle = listAnim[animIndex].EndAnimationToggle;
-					entryPlayerAnim.DirIndex = dirIndex;
-					entryPlayerAnim.FaceDirValue = faceDirValue;
+					entryAnim.DirIndex = dirIndex;
+					entryAnim.FaceDirValue = faceDirValue;
 					// entryPlayerAnim.State = state;
 					// entryPlayerAnim.StartAnimationToggle = 0;
 
 					// listAnim[animIndex] = new EntryPlayerAnim(dirIndex, faceDirValue, state, 0, endAnimToggle);
-					listAnim[animIndex] = entryPlayerAnim;	
+					listAnim[animIndex] = entryAnim;	
 
 					//SET TO PLAYER (PARENT)						
 					player.StartAnimationToggle = 0;
@@ -134,10 +136,10 @@ namespace Javatale.Prototype
 					//SET LIST
 					// int startAnimToggle = listAnim[animIndex].StartAnimationToggle;
 					// entryPlayerAnim.State = state;
-					entryPlayerAnim.EndAnimationToggle = 0;
+					entryAnim.EndAnimationToggle = 0;
 
 					// listAnim[animIndex] = new EntryPlayerAnim(dirIndex, faceDirValue, state, startAnimToggle, 0);
-					listAnim[animIndex] = entryPlayerAnim;	
+					listAnim[animIndex] = entryAnim;	
 
 					//SET TO PLAYER (PARENT)						
 					player.EndAnimationToggle = 0;

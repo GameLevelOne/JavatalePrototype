@@ -7,6 +7,9 @@ namespace Javatale.Prototype
 	//PLAYER
 	public struct Player : IComponentData
 	{
+		public int AnimStateIndex;
+
+		[HeaderAttribute("Current")]
 		public PlayerAnimationState State;
 
 		/// <summary>
@@ -23,6 +26,12 @@ namespace Javatale.Prototype
 		public int EndAnimationToggle;
 		public int AnimationToggleValue;
 		
+		/// <summary>
+		/// <para>Values: <br /></para>
+		/// <para>0 Attack 1<br /></para>
+		/// <para>1 Attack 2<br /></para>
+		/// <para>2 Attack 3<br /></para>
+		/// </summary>
 		public int AttackIndex;
 	}
 	public class PlayerComponent : ComponentDataWrapper<Player> {}
@@ -39,8 +48,11 @@ namespace Javatale.Prototype
 	//BEE
 	public struct Bee : IComponentData
 	{
+
+		[HeaderAttribute("Current")]
 		public BeeAnimationState State;
 		public int AnimationToggle;
+		public int AnimStateIndex;
 	}
 	public class BeeComponent : ComponentDataWrapper<Bee> {}
 }

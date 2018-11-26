@@ -24,7 +24,9 @@ namespace Javatale.Prototype
 		protected override void OnUpdate () 
 		{
 			EntityCommandBuffer commandBuffer = PostUpdateCommands;
-            List<EntryPlayerAnim> listAnim = GameManager.entitiesPlayerAnim;
+			List<EntryAnimation> listAnim = GameManager.entitiesAnimation;
+            // List<EntryPlayerAnim> listAnim = GameManager.entitiesPlayerAnim;
+			List<EntryPlayerAnimState> listPlayerAnimState = GameManager.entitiesPlayerAnimState;
 
 			for (int i=0; i<parentData.Length; i++) {
 				Entity animEntity = parentData.AnimationRunEntities[i];
@@ -34,19 +36,21 @@ namespace Javatale.Prototype
 
 				commandBuffer.RemoveComponent<AnimationPlayerMoveRun>(animEntity);
                 
-				//SET LIST
-				// int dirIndex = faceDir.dirIndex;
-				// float3 faceDirValue = faceDir.Value;
+				//SET LIST ANIMATION
+				int animIndex = parent.AnimIndex;
+				EntryAnimation entryAnim = listAnim[animIndex];
+				entryAnim.StartAnimationToggle = 2;
+
+				listAnim[animIndex] = entryAnim;
+				
+				//SET LIST PLAYER ANIMATION STATE
 				PlayerAnimationState state = PlayerAnimationState.MOVE_RUN;
-				// int endAnimToggle = listAnim[parent.AnimIndex].EndAnimationToggle;
 
-				EntryPlayerAnim entryPlayerAnim = listAnim[parent.AnimIndex];
-				entryPlayerAnim.State = state;
-				entryPlayerAnim.StartAnimationToggle = 2;
-
-				// listAnim[parent.AnimIndex] = new EntryPlayerAnim(dirIndex, faceDirValue, state, 2, endAnimToggle);
-				listAnim[parent.AnimIndex] = entryPlayerAnim;	
-				// GameDebug.Log("Set : "+listAnim[parent.AnimIndex].State+"\n StartAnimationToggle : "+listAnim[parent.AnimIndex].StartAnimationToggle);
+				int playerAnimStateIndex = player.AnimStateIndex;
+				EntryPlayerAnimState entryPlayerAnimState = listPlayerAnimState[playerAnimStateIndex];
+				entryPlayerAnimState.State = state;
+				
+				listPlayerAnimState[playerAnimStateIndex] = entryPlayerAnimState;
 
 				//SET TO PLAYER (PARENT)	
 				player.AttackIndex = 0;		

@@ -6,5 +6,6 @@ namespace Javatale.Prototype
 	{
 		public int PosIndex;
 		public int AnimIndex;
+		public int AnimStateIndex;
 	}
 }
