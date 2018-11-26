@@ -49,6 +49,9 @@ namespace Javatale.Prototype
 				}
 			}
 
+			string faceX = Constants.AnimatorParameter.Float.FACE_X;
+			string faceY = Constants.AnimatorParameter.Float.FACE_Y;
+
 			for (int j=0; j<childData.Length; j++)
 			{
 				ChildComponent child = childData.Child[j];
@@ -59,21 +62,6 @@ namespace Javatale.Prototype
 
 				float3 faceDirValue = entryPlayerAnim.FaceDirValue;
 				PlayerAnimationState state = entryPlayerAnim.State;
-				
-#region DIRECTION
-				int dirIndex = entryPlayerAnim.DirIndex;
-				int currentDirIndex = anim.currentDirIndex;
-				
-				if (dirIndex != currentDirIndex) 
-				{
-					anim.animator.SetFloat(Constants.AnimatorParameter.Float.FACE_X, faceDirValue.x);
-                    anim.animator.SetFloat(Constants.AnimatorParameter.Float.FACE_Y, faceDirValue.z);
-                    
-					anim.currentDirIndex = dirIndex;
-					anim.currentFaceDirValue = faceDirValue;
-				}
-#endregion
-
 
 #region PLAY & STOP ANIMATION
 				// PlayerAnimationState currentState = anim.currentState;
@@ -108,6 +96,20 @@ namespace Javatale.Prototype
 
 						anim.isCheckOnEndSpecificAnimation = false;
 					}
+				}
+#endregion
+				
+#region DIRECTION
+				int dirIndex = entryPlayerAnim.DirIndex;
+				int currentDirIndex = anim.currentDirIndex;
+				
+				if (dirIndex != currentDirIndex) 
+				{
+					anim.animator.SetFloat(faceX, faceDirValue.x);
+                    anim.animator.SetFloat(faceY, faceDirValue.z);
+                    
+					anim.currentDirIndex = dirIndex;
+					anim.currentFaceDirValue = faceDirValue;
 				}
 #endregion
 			}
