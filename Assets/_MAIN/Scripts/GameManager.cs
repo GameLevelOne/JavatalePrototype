@@ -4,7 +4,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
-using Unity.Rendering;
+// using Unity.Rendering;
 using UnityEngine.SceneManagement;
 
 using UnityRandom = UnityEngine.Random; //AMBIGUOUS ISSUE
@@ -36,7 +36,7 @@ namespace Javatale.Prototype
 
 		#region Empty List
 		public static List<int> emptyPosIndexes;
-		public static List<int> emptyProjectileAnimIndexes;
+		public static List<int> emptyAnimIndexes;
 		#endregion
 
 		[RuntimeInitializeOnLoadMethodAttribute(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -76,6 +76,7 @@ namespace Javatale.Prototype
 			);
 
 			entitiesPos = new List<float3>();
+			entitiesAnimation = new List<EntryAnimation>();
 			entitiesPlayerAnimState = new List<EntryPlayerAnimState>();
 			entitiesBeeAnimState = new List<EntryBeeAnimState>();
 			// entitiesPlayerAnim = new List<EntryPlayerAnim>();
@@ -83,7 +84,7 @@ namespace Javatale.Prototype
 			// entitiesBeeAnim = new List<EntryBeeAnim>();
 
 			emptyPosIndexes = new List<int>();
-			emptyProjectileAnimIndexes = new List<int>();
+			emptyAnimIndexes = new List<int>();
 		}
 
 		public static void NewGame () 

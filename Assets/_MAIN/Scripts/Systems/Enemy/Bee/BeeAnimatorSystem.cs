@@ -20,7 +20,8 @@ namespace Javatale.Prototype
 
 		protected override void OnUpdate () 
 		{
-            List<EntryBeeAnim> listAnim = GameManager.entitiesBeeAnim;
+            List<EntryAnimation> listAnim = GameManager.entitiesAnimation;
+            List<EntryBeeAnimState> listBeeAnimState = GameManager.entitiesBeeAnimState;
 
 			for (int i=0; i<childData.Length; i++)
 			{
@@ -30,8 +31,11 @@ namespace Javatale.Prototype
 				int currentDirIndex = anim.currentDirIndex;
 				BeeAnimationState currentState = anim.currentState;
 
-				int dirIndex = listAnim[child.AnimIndex].DirIndex;
-				BeeAnimationState state = listAnim[child.AnimIndex].State;
+				int childAnimIndex = child.AnimIndex;
+				int dirIndex = listAnim[childAnimIndex].DirIndex;
+				
+				int childBeeAnimStateIndex = child.AnimStateIndex;
+				BeeAnimationState state = listBeeAnimState[childBeeAnimStateIndex].State;
 
 				if (state != currentState)
 				{

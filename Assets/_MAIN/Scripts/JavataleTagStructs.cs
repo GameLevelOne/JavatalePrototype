@@ -39,20 +39,25 @@ namespace Javatale.Prototype
 	//PROJECTILE
 	public struct Projectile : IComponentData
 	{
-		// public int StartAnimationToggle;
-		// public int EndAnimationToggle;
 		//
 	}
 	public class ProjectileComponent : ComponentDataWrapper<Projectile> {}
     
+	//DESTROYED
+	// public struct Destroyed : IComponentData
+	// {
+	// 	//
+	// }
+	// public class DestroyThisParentComponent : ComponentDataWrapper<Destroyed> {}
+
 	//BEE
 	public struct Bee : IComponentData
 	{
+		public int AnimStateIndex;
 
 		[HeaderAttribute("Current")]
 		public BeeAnimationState State;
 		public int AnimationToggle;
-		public int AnimStateIndex;
 	}
 	public class BeeComponent : ComponentDataWrapper<Bee> {}
 }

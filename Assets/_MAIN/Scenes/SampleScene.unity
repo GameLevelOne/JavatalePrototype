@@ -492,11 +492,11 @@ MonoBehaviour:
   enemyMaxPatrolCooldown: 10
   enemyMinIdleCooldown: 3
   enemyMaxIdleCooldown: 8
-  playerMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
-  beeEnemyMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
-  playerAttackMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
-  playerMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  enemyMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  playerMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 3}
+  beeEnemyMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 3}
+  playerAttackMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 3}
+  playerMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 3}
+  enemyMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 3}
   playerAttackMaterials:
   - {fileID: 2100000, guid: 213dc1a218904cf40b17c640e57b407a, type: 2}
   - {fileID: 2100000, guid: 1ff3a0aadb5602040a48b8075a8572a9, type: 2}

@@ -104,8 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationEvent: {fileID: 114549278068720368}
-  isInitDestroyed: 0
-  isDestroyed: 0
+  entityGO: {fileID: 114539466256010724}
 --- !u!114 &114414686523999252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -119,6 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PosIndex: 0
   AnimIndex: 0
+  AnimStateIndex: 0
 --- !u!114 &114539466256010724
 MonoBehaviour:
   m_ObjectHideFlags: 1

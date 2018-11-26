@@ -33,15 +33,15 @@ namespace Javatale.Prototype
         
         // public Vector3 worldToCameraRotation = new Vector3 (40f, 0f, 0f); 
 
-        [HeaderAttribute("Rendering")]
-        public Mesh playerMesh;
-        public Mesh beeEnemyMesh;
-        public Mesh playerAttackMesh;
-        public Material playerMaterial;
-        public Material enemyMaterial;
+        // [HeaderAttribute("Rendering")]
+        // public Mesh playerMesh;
+        // public Mesh beeEnemyMesh;
+        // public Mesh playerAttackMesh;
+        // public Material playerMaterial;
+        // public Material enemyMaterial;
 
-        [HeaderAttribute("Index = 0 : Attack 1, 1 : Attack 2, 2 : Attack 3")]
-        public Material[] playerAttackMaterials;
+        // [HeaderAttribute("Index = 0 : Attack 1, 1 : Attack 2, 2 : Attack 3")]
+        // public Material[] playerAttackMaterials;
 
         [SpaceAttribute(10f)]
         public GameObject playerChild;

@@ -28,7 +28,8 @@ namespace Javatale.Prototype
 				FaceDirection faceDir = parentData.FaceDirection[i];
 
 				commandBuffer.RemoveComponent<AnimationBeeMoveFly>(animEntity);
-				GameManager.entitiesBeeAnim[parent.AnimIndex] = new EntryBeeAnim(faceDir.dirIndex, BeeAnimationState.MOVE_FLY);
+				
+				// GameManager.entitiesBeeAnim[parent.AnimIndex] = new EntryBeeAnim(faceDir.dirIndex, BeeAnimationState.MOVE_FLY);
 			}
 		}
 	}

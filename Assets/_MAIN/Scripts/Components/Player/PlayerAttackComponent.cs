@@ -1,16 +1,12 @@
-﻿// using System.Collections;
-// using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Unity.Entities;
 
 namespace Javatale.Prototype
 {
 	public class PlayerAttackComponent : MonoBehaviour 
 	{
 		public AnimationEvent animationEvent;
-
-		[HeaderAttribute("Current")]
-		public bool isInitDestroyed = false;
-		public bool isDestroyed = false;
+		public GameObjectEntity entityGO;
 		
 		void OnEnable ()
 		{
@@ -24,7 +20,9 @@ namespace Javatale.Prototype
 
 		void OnEndAnimation ()
 		{
-			isInitDestroyed = true;
+			gameObject.AddComponent<DestroyThisChildComponent>();
+			entityGO.enabled = false;
+			entityGO.enabled = true;
 		}
 	}
 }

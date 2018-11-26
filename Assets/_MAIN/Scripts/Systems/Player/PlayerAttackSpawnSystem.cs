@@ -27,10 +27,10 @@ namespace Javatale.Prototype
 			// Mesh playerAttackMesh = settings.playerAttackMesh;
 			// Material[] playerAttackMaterials = settings.playerAttackMaterials;
            	List<float3> listPos = GameManager.entitiesPos;
-           	List<EntryProjectileAnim> listProjectileAnim = GameManager.entitiesProjectileAnim;
+           	List<EntryAnimation> listAnim = GameManager.entitiesAnimation;
 			   
 			List<int> emptyPosIndexes = GameManager.emptyPosIndexes;
-           	List<int> emptyProjectileAnimIndexes = GameManager.emptyProjectileAnimIndexes;
+           	List<int> emptyAnimIndexes = GameManager.emptyAnimIndexes;
 			
 			for (int i=0; i<data.Length; i++) {
 				PlayerAttackSpawnData playerAttackSpawnData = data.PlayerAttackSpawnData[i];
@@ -52,10 +52,6 @@ namespace Javatale.Prototype
 				commandBuffer.AddComponent(playerAttackEntity, attackInitFaceDir);
 				commandBuffer.AddComponent(playerAttackEntity, attackParent);
 				commandBuffer.AddComponent(playerAttackEntity, attackProjectile);
-				// commandBuffer.AddSharedComponent(playerAttackEntity, new MeshInstanceRenderer {
-				// 	mesh = playerAttackMesh,
-				// 	material = playerAttackMaterials[attackIndex]
-				// });
 
 				#region POS LIST
 				float3 attackPosValue = attackInitPos.Value;
@@ -86,23 +82,23 @@ namespace Javatale.Prototype
 				float3 attackFaceValue = attackInitFaceDir.Value;
 				int currentAnimListIndex = 0;
 
-				if (emptyProjectileAnimIndexes.Count > 0) 
+				if (emptyAnimIndexes.Count > 0) 
 				{
 					//Get empty index from their list, then remove it
-					int emptyProjectileAnimIndex = emptyProjectileAnimIndexes[0];
-					emptyProjectileAnimIndexes.RemoveAt(0);
+					int emptyProjectileAnimIndex = emptyAnimIndexes[0];
+					emptyAnimIndexes.RemoveAt(0);
 
 					//Set projectile list by its empty index
-					listProjectileAnim[emptyProjectileAnimIndex] = new EntryProjectileAnim(attackFaceDirIndex, attackFaceValue, 1, 0); //START 1, END 0
+					listAnim[emptyProjectileAnimIndex] = new EntryAnimation(attackFaceDirIndex, attackFaceValue, 1, 0); //START 1, END 0
 
 					//Set current index by its empty index
 					currentAnimListIndex = emptyProjectileAnimIndex;
 				}
 				else 
 				{
-					listProjectileAnim.Add(new EntryProjectileAnim(attackFaceDirIndex, attackFaceValue, 1, 0)); //START 1, END 0
+					listAnim.Add(new EntryAnimation(attackFaceDirIndex, attackFaceValue, 1, 0)); //START 1, END 0
 					
-					currentAnimListIndex = listProjectileAnim.Count-1;
+					currentAnimListIndex = listAnim.Count-1;
 				}
 				#endregion
 

@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PosIndex: 0
   AnimIndex: 0
+  AnimStateIndex: 0
 --- !u!114 &114996586109536432
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -139,8 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationEvent: {fileID: 114505512144477198}
-  isInitDestroyed: 0
-  isDestroyed: 0
+  entityGO: {fileID: 114711648306472732}
 --- !u!212 &212766376774255364
 SpriteRenderer:
   m_ObjectHideFlags: 1
