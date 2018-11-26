@@ -1,6 +1,8 @@
 using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
+using Unity.Mathematics;
+using System.Collections.Generic;
 
 namespace Javatale.Prototype 
 {
@@ -12,48 +14,59 @@ namespace Javatale.Prototype
 		{
 			public readonly int Length;
 			[ReadOnlyAttribute] public EntityArray AnimationEntities;
-			public ComponentDataArray<EnemyAI> EnemyAI;
-			[ReadOnlyAttribute] public ComponentDataArray<MoveDirection> MoveDirection;
+			public ComponentDataArray<Bee> Bee;
+			public ComponentDataArray<MoveDirection> MoveDirection;
+			[ReadOnlyAttribute] public ComponentDataArray<FaceDirection> FaceDirection;
+			[ReadOnlyAttribute] public ComponentDataArray<Parent> Parent;
 		}
 		[InjectAttribute] private Data data;
 
-		Vector3 vectorZero = Vector3.zero;
+		// Vector3 vector3Zero = Vector3.zero;
+		float3 float3Zero = float3.zero;
 
 		protected override void OnUpdate () 
 		{
 			EntityCommandBuffer commandBuffer = PostUpdateCommands;
+			List<EntryAnimation> listAnim = GameManager.entitiesAnimation;
 
 			for (int i=0; i<data.Length; i++)
 			{
 				Entity animEntity = data.AnimationEntities[i];
+				Bee bee = data.Bee[i];
 				MoveDirection moveDir = data.MoveDirection[i];
-				EnemyAI enemyAI = data.EnemyAI[i];
+				FaceDirection faceDir = data.FaceDirection[i];
+				Parent parent = data.Parent[i];
 
-				Vector3 direction = moveDir.Value;
-				int enemyAnimTogglevalue = enemyAI.AnimationToggle;
+				// Vector3 direction = moveDir.Value;
+				int animIndex = parent.AnimIndex;
+				EntryAnimation entryAnim = listAnim[animIndex];
+				
+				int beeStartAnimToggle = bee.StartAnimationToggle;
+				int beeEndAnimToggle = bee.EndAnimationToggle;
+				int beeAnimToggleValue = bee.AnimationToggleValue;
 
-				if (enemyAnimTogglevalue > 0) 
+				if (beeStartAnimToggle != 0) 
 				{
-					switch (enemyAnimTogglevalue) 
+					switch (beeStartAnimToggle) 
 					{
 						case 1:
-							if (direction != vectorZero)
-							{
-								commandBuffer.AddComponent(animEntity, new AnimationBeeMoveFly{});
-							}
-							else 
-							{
-								commandBuffer.AddComponent(animEntity, new AnimationBeeIdleFly{});
-							}
-						
-							enemyAI.AnimationToggle = 0;
-							data.EnemyAI[i] = enemyAI;
+							commandBuffer.AddComponent(animEntity, new AnimationBeeIdleFly{});
 							break;
-						default:
-							enemyAI.AnimationToggle = 0;
-							data.EnemyAI[i] = enemyAI;
+						case 2:
+							commandBuffer.AddComponent(animEntity, new AnimationBeeMoveFly{});
 							break;
 					}
+                
+					int dirIndex = faceDir.dirIndex;
+					float3 faceDirValue = faceDir.Value;
+					
+					entryAnim.DirIndex = dirIndex;
+					entryAnim.FaceDirValue = faceDirValue;
+					
+					listAnim[animIndex] = entryAnim;
+
+					bee.StartAnimationToggle = 0;
+					data.Bee[i] = bee;
 				}
 			}
 		}	

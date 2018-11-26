@@ -59,8 +59,8 @@ namespace Javatale.Prototype
 				ChildComponent child = childData.Child[j];
 				PlayerAnimatorComponent anim = childData.Animator[j];
 
-				int childIndex = child.AnimIndex;
-				EntryAnimation entryAnim = listAnim[childIndex];
+				int childAnimIndex = child.AnimIndex;
+				EntryAnimation entryAnim = listAnim[childAnimIndex];
 				float3 faceDirValue = entryAnim.FaceDirValue;
 
 				int childAnimStateIndex = child.AnimStateIndex;
@@ -73,23 +73,23 @@ namespace Javatale.Prototype
 				if (playerStartAnimToggle != 0)
 				{
                     anim.animator.Play(state.ToString());
-
 					anim.currentState = state;
+					
 					entryAnim.StartAnimationToggle = 0;
-					listAnim[childIndex] = entryAnim;
+					listAnim[childAnimIndex] = entryAnim;
 				}
 				else 
 				{
 					if (anim.isCheckOnEndAnimation) {
 						entryAnim.EndAnimationToggle = 1;
-						listAnim[childIndex] = entryAnim;
+						listAnim[childAnimIndex] = entryAnim;
 
 						anim.isCheckOnEndAnimation = false;
 					}
 
 					if (anim.isCheckOnEndSpecificAnimation) {
 						entryAnim.EndAnimationToggle = 2;
-						listAnim[childIndex] = entryAnim;
+						listAnim[childAnimIndex] = entryAnim;
 
 						anim.isCheckOnEndSpecificAnimation = false;
 					}

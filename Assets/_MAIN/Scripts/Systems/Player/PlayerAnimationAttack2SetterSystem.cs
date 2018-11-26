@@ -43,6 +43,8 @@ namespace Javatale.Prototype
 				EntryAnimation entryAnim = listAnim[animIndex];
 				entryAnim.StartAnimationToggle = 22;
 
+				listAnim[parent.AnimIndex] = entryAnim;
+
 				//SET LIST PLAYER ANIMATION STATE
 				PlayerAnimationState state = PlayerAnimationState.ATTACK_2;
 

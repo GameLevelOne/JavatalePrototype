@@ -126,7 +126,6 @@ namespace Javatale.Prototype
 				attackGO.GetComponent<ChildComponent>().PosIndex = currentPosListIndex;
 				attackGO.GetComponent<ChildComponent>().AnimIndex = currentAnimListIndex;
 
-				// GameDebug.Log("currentPosListIndex "+currentPosListIndex+"\n attackPosValue "+attackPosValue);
 				attackGO.SetActive(true);
 			}
 		}

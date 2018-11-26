@@ -65,8 +65,7 @@ namespace Javatale.Prototype
 				typeof(MoveDirection),
 				typeof(FaceDirection),
 				typeof(MoveSpeed),
-				typeof(Parent),
-				typeof(EnemyAI)
+				typeof(Parent)
 
 				// typeof(MeshInstanceRenderer)
 			);
@@ -198,8 +197,7 @@ namespace Javatale.Prototype
 				float randomIdleTimer = UnityRandom.Range(settings.enemyMinIdleCooldown, settings.enemyMaxIdleCooldown);
 				float3 randomMoveDir = new float3 (UnityRandom.Range(-1,2) == 0 ? 1f : -1f, 0f, UnityRandom.Range(-1,2) == 0 ? 1f : -1f);
 
-				manager.SetComponentData(entities[i], new Bee { State = BeeAnimationState.IDLE_FLY, AnimationToggle = 1 });
-				manager.SetComponentData(entities[i], new EnemyAI { IdleTimer = randomIdleTimer, PatrolTimer = 0f });
+				manager.SetComponentData(entities[i], new Bee { State = BeeAnimationState.IDLE_FLY, StartAnimationToggle = 1, EndAnimationToggle = 0, IdleTimer = randomIdleTimer, PatrolTimer = 0f });
 				manager.SetComponentData(entities[i], new Position { Value = new float3(xVal, 0f, zVal) });
 				manager.SetComponentData(entities[i], new Rotation { Value = Quaternion.Euler(worldToCameraRotation) });
 				manager.SetComponentData(entities[i], new MoveDirection { Value = float3Zero });
@@ -225,7 +223,7 @@ namespace Javatale.Prototype
 				int currentAnimListIndex = entitiesAnimation.Count-1; 
 				#endregion
 
-				#region PLAYER ANIMATION STATE LIST
+				#region BEE ANIMATION STATE LIST
 				entitiesBeeAnimState.Add(new EntryBeeAnimState(BeeAnimationState.IDLE_FLY));
 				int currentBeeAnimStateListIndex = entitiesBeeAnimState.Count-1;
 				#endregion

@@ -6,14 +6,12 @@ using Unity.Mathematics;
 using UnityEngine;
 using Unity.Burst;
 
-using UnityRandom = UnityEngine.Random; //AMBIGUOUS ISSUE
-
 namespace Javatale.Prototype 
 {
-	public class EnemyAIDirectionSystem : JobComponentSystem 
+	public class BeeDirectionSystem : JobComponentSystem 
 	{
 		[BurstCompileAttribute]
-		struct EnemyAIDirectionJob : IJobProcessComponentData <EnemyAI, MoveDirection, FaceDirection>
+		struct BeeDirectionJob : IJobProcessComponentData <Bee, MoveDirection, FaceDirection>
 		{
             public float deltaTime;
             public float minPatrolCooldown;
@@ -23,7 +21,7 @@ namespace Javatale.Prototype
             public Vector3 vector3Zero;
 
 			public void Execute (
-				ref EnemyAI enemyAI,
+				ref Bee bee,
 				ref MoveDirection moveDir,
 				ref FaceDirection faceDir)
 			{
@@ -31,23 +29,23 @@ namespace Javatale.Prototype
                 
                 if (moveDirValue != vector3Zero)
                 {
-                    float patrolTimer = enemyAI.PatrolTimer;
+                    float patrolTimer = bee.PatrolTimer;
 
                     if (patrolTimer <= 0.0f) 
                     {
                         moveDir.Value = new float3(0f, 0f, 0f);
 
-                        enemyAI.IdleTimer = minIdleCooldown;
-                        enemyAI.AnimationToggle = 1;
+                        bee.IdleTimer = minIdleCooldown;
+                        bee.StartAnimationToggle = 1;
                     }
                     else
                     {
-                        enemyAI.PatrolTimer -= deltaTime;
+                        bee.PatrolTimer -= deltaTime;
                     }
                 }
                 else
                 {
-                    float idleTimer = enemyAI.IdleTimer;
+                    float idleTimer = bee.IdleTimer;
 
                     if (idleTimer <= 0.0f) 
                     {
@@ -83,14 +81,14 @@ namespace Javatale.Prototype
 
                         if (direction != vector3Zero) faceDir.Value = direction;
 
-                        enemyAI.PatrolTimer = minPatrolCooldown;
+                        bee.PatrolTimer = minPatrolCooldown;
 					    moveDir.Value = direction;
 
-                        enemyAI.AnimationToggle = 1;
+                        bee.StartAnimationToggle = 2;
                     }
                     else
                     {
-                        enemyAI.IdleTimer -= deltaTime;
+                        bee.IdleTimer -= deltaTime;
                     }
                 }
 			}
@@ -98,7 +96,7 @@ namespace Javatale.Prototype
 
 		protected override JobHandle OnUpdate (JobHandle inputDeps)
 		{
-			EnemyAIDirectionJob enemyAIDirJob = new EnemyAIDirectionJob
+			BeeDirectionJob enemyAIDirJob = new BeeDirectionJob
 			{
                 deltaTime = Time.deltaTime,
                 minPatrolCooldown = GameManager.settings.enemyMinPatrolCooldown,

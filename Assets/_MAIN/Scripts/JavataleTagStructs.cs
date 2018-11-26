@@ -57,7 +57,12 @@ namespace Javatale.Prototype
 
 		[HeaderAttribute("Current")]
 		public BeeAnimationState State;
-		public int AnimationToggle;
+		public int StartAnimationToggle;
+		public int EndAnimationToggle;
+		public int AnimationToggleValue;
+		
+		public float IdleTimer;
+		public float PatrolTimer;
 	}
 	public class BeeComponent : ComponentDataWrapper<Bee> {}
 }
