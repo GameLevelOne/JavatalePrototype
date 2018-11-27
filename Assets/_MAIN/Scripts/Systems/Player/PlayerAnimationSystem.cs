@@ -58,11 +58,6 @@ namespace Javatale.Prototype
 							commandBuffer.AddComponent(animEntity, new AnimationPlayerMoveRun{});
 						
 							break;
-						case 3:
-							//
-							GameDebug.Log("ADD COMPONENT GET HURT");
-						
-							break;
 						case 21:
 							commandBuffer.AddComponent(animEntity, new AnimationPlayerAttack1{});
 
@@ -83,6 +78,13 @@ namespace Javatale.Prototype
 							moveDir.Value = float3Zero;
 							data.MoveDirection[i] = moveDir;
 
+							break;
+						case 41:
+							commandBuffer.AddComponent(animEntity, new AnimationPlayerHitHurt{});
+
+							moveDir.Value = float3Zero; //SET KNOCKBACK
+							data.MoveDirection[i] = moveDir;
+						
 							break;
 					}
                 

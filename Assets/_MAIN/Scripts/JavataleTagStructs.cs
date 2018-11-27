@@ -16,13 +16,12 @@ namespace Javatale.Prototype
 
 		/// <summary>
 		/// <para>Values: <br /></para>
-		/// <para>-2 Reset PlayerAttackComponent<br /></para>
-		/// <para>-1 Reset PlayerInputComponent<br /></para>
 		/// <para>0 OFF<br /></para>
 		/// <para>1 Idle Stand<br /></para>
 		/// <para>2 Idle Run<br /></para>
 		/// <para>21 Attack 1<br /></para>
 		/// <para>22 Attack 2<br /></para>
+		/// <para>41 Normal Hit<br /></para>
 		/// </summary>
 		public int StartAnimationToggle;
 		// public int EndAnimationToggle;
@@ -68,7 +67,16 @@ namespace Javatale.Prototype
     {
         public int DirIndex; //USELESS
         public float3 FaceDirValue;
-        public int StartAnimationToggle;
+        /// <summary>
+		/// <para>Values: <br /></para>
+		/// <para>0 OFF<br /></para>
+		/// <para>1 Idle Stand<br /></para>
+		/// <para>2 Idle Run<br /></para>
+		/// <para>21 Attack 1<br /></para>
+		/// <para>22 Attack 2<br /></para>
+		/// <para>41 Normal Hit<br /></para>
+		/// </summary>
+		public int StartAnimationToggle;
 
         public EntryAnimation (int dirIndex, float3 faceDirValue, int startAnimToggle)
         {

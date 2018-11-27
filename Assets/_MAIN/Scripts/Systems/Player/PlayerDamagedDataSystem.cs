@@ -15,7 +15,7 @@ namespace Javatale.Prototype
 			public readonly int Length;
 			[ReadOnlyAttribute] public EntityArray Entities;
 			[ReadOnlyAttribute] public ComponentDataArray<Parent> Parent;
-			[ReadOnlyAttribute] public ComponentDataArray<Player> Player;
+			public ComponentDataArray<Player> Player;
 			public ComponentDataArray<DamagedData> DamagedData;
 		}
 		[InjectAttribute] private Data data;
@@ -30,6 +30,7 @@ namespace Javatale.Prototype
 			{
 				Entity entity = data.Entities[i];
 				DamagedData damagedData = data.DamagedData[i];
+                Player player = data.Player[i];
 
                 float damagedValue = damagedData.Value; // FOR HEALTH
                 int damagedType = (int) damagedData.Type;
@@ -39,7 +40,8 @@ namespace Javatale.Prototype
                 switch (damagedType)
                 {
                     default : // CASE 0	NORMAL		
-                        commandBuffer.AddComponent(entity, new AnimationPlayerIdleStand{});
+                        player.StartAnimationToggle = 41;
+                        data.Player[i] = player;
                         
                         break;
                 }

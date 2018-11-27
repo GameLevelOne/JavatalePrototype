@@ -58,7 +58,8 @@ namespace Javatale.Prototype
         MOVE_RUN,
         ATTACK_1,
         ATTACK_2,
-        ATTACK_3
+        ATTACK_3,
+        HIT_HURT
     }
 
 	public enum BeeAnimationState
@@ -73,52 +74,4 @@ namespace Javatale.Prototype
         STUN,
         KNOCKDOWN
     }
-
-#region OLD
-    // public struct EntryPlayerAnim
-    // {
-    //     public int DirIndex; //USELESS
-    //     public float3 FaceDirValue;
-    //     public PlayerAnimationState State;
-    //     public int StartAnimationToggle;
-    //     public int EndAnimationToggle;
-
-    //     public EntryPlayerAnim (int dirIndex, float3 faceDirValue, PlayerAnimationState state, int startAnimToggle, int endAnimToggle)
-    //     {
-    //         DirIndex = dirIndex;
-    //         FaceDirValue = faceDirValue;
-    //         State = state;
-    //         StartAnimationToggle = startAnimToggle;
-    //         EndAnimationToggle = endAnimToggle;
-    //     }
-    // }
-
-    // public struct EntryProjectileAnim
-    // {
-    //     public int DirIndex; //USELESS
-    //     public float3 FaceDirValue;
-    //     public int StartAnimationToggle;
-    //     public int EndAnimationToggle;
-
-    //     public EntryProjectileAnim (int dirIndex, float3 faceDirValue, int startAnimToggle, int endAnimToggle)
-    //     {
-    //         DirIndex = dirIndex;
-    //         FaceDirValue = faceDirValue;
-    //         StartAnimationToggle = startAnimToggle;
-    //         EndAnimationToggle = endAnimToggle;
-    //     }
-    // }
-
-    // public struct EntryBeeAnim
-    // {
-    //     public int DirIndex;
-    //     public BeeAnimationState State;
-
-    //     public EntryBeeAnim (int dirIndex, BeeAnimationState state)
-    //     {
-    //         DirIndex = dirIndex;
-    //         State = state;
-    //     }
-    // }
-#endregion
 }

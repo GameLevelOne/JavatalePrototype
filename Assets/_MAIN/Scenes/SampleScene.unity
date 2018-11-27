@@ -487,7 +487,7 @@ MonoBehaviour:
   worldToCameraRotation: {x: 40, y: 0, z: 0}
   maxPlayerAttackIndex: 2
   playerMoveSpeed: 5
-  maxEnemy: 10
+  maxEnemy: 1000
   enemyMoveSpeed: 3
   enemyMinPatrolCooldown: 5
   enemyMaxPatrolCooldown: 10
