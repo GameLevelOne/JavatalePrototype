@@ -1,6 +1,6 @@
 using Unity.Collections;
 using Unity.Entities;
-using UnityEngine;
+// using UnityEngine;
 using Unity.Burst;
 using Unity.Mathematics;
 using System.Collections.Generic;
@@ -9,15 +9,6 @@ namespace Javatale.Prototype
 {
 	public class PlayerAnimatorSystem : ComponentSystem 
 	{
-		[BurstCompileAttribute]
-		public struct ParentData
-		{
-			public readonly int Length;
-			[ReadOnlyAttribute] public ComponentDataArray<Parent> Parent;
-			public ComponentDataArray<Player> Player;
-		}
-		[InjectAttribute] private ParentData parentData;
-
 		[BurstCompileAttribute]
 		public struct ChildData
 		{
@@ -32,24 +23,6 @@ namespace Javatale.Prototype
 			List<EntryAnimation> listAnim = GameManager.entitiesAnimation;
             // List<EntryPlayerAnim> listAnim = GameManager.entitiesPlayerAnim;
 			List<PlayerAnimationState> listPlayerAnimState = GameManager.entitiesPlayerAnimState;
-
-			for (int i=0; i<parentData.Length; i++)
-			{
-				Parent parent = parentData.Parent[i];
-				Player player = parentData.Player[i];
-
-				int parentIndex = parent.AnimIndex;
-				EntryAnimation entryAnim = listAnim[parentIndex];
-
-				int endAnimToggle = entryAnim.EndAnimationToggle;
-				int currentEndAnimToggle = player.EndAnimationToggle;
-
-				if (endAnimToggle != currentEndAnimToggle) 
-				{
-					player.EndAnimationToggle = endAnimToggle;
-					parentData.Player[i] = player;
-				}
-			}
 
 			string faceX = Constants.AnimatorParameter.Float.FACE_X;
 			string faceY = Constants.AnimatorParameter.Float.FACE_Y;
@@ -78,22 +51,6 @@ namespace Javatale.Prototype
 					entryAnim.StartAnimationToggle = 0;
 					listAnim[childAnimIndex] = entryAnim;
 				}
-				// else 
-				// {
-				// 	if (anim.isCheckOnEndAnimation) {
-				// 		entryAnim.EndAnimationToggle = 1;
-				// 		listAnim[childAnimIndex] = entryAnim;
-
-				// 		anim.isCheckOnEndAnimation = false;
-				// 	}
-
-				// 	if (anim.isCheckOnEndSpecificAnimation) {
-				// 		entryAnim.EndAnimationToggle = 2;
-				// 		listAnim[childAnimIndex] = entryAnim;
-
-				// 		anim.isCheckOnEndSpecificAnimation = false;
-				// 	}
-				// }
 #endregion
 				
 #region DIRECTION

@@ -9,13 +9,13 @@ using System.Collections.Generic;
 
 namespace Javatale.Prototype
 {
-	public class ChildDestroyerSystem : ComponentSystem 
+	public class DestroyerSystem : ComponentSystem 
 	{
 		[BurstCompileAttribute]
 		public struct Data 
 		{
 			public readonly int Length;
-			[ReadOnlyAttribute] public ComponentArray<DestroyChildComponent> DestroyChildComponent;
+			[ReadOnlyAttribute] public ComponentArray<DestroyComponent> DestroyComponent;
 			[ReadOnlyAttribute] public ComponentArray<ChildComponent> ChildComponent;
 		}
 		[InjectAttribute] private Data data;
@@ -25,7 +25,6 @@ namespace Javatale.Prototype
 			EntityCommandBuffer commandBuffer = PostUpdateCommands;
 			
 			List<Entity> listEntities = GameManager.entitiesInGame;
-			List<EntryAnimation> listAnim = GameManager.entitiesAnimation;
 			
 			List<int> emptyEntitiesIndexes = GameManager.emptyEntitiesIndexes;
 			List<int> emptyPosIndexes = GameManager.emptyPosIndexes;
@@ -33,7 +32,7 @@ namespace Javatale.Prototype
 
             for (int i=0; i<data.Length; i++)
 			{
-				DestroyChildComponent destroyChildComponent = data.DestroyChildComponent[i];
+				DestroyComponent destroyComponent = data.DestroyComponent[i];
 				ChildComponent childComponent = data.ChildComponent[i];
 
 				int childEntityIndex = childComponent.EntityIndex;
@@ -49,18 +48,12 @@ namespace Javatale.Prototype
                 //Add anim index to List of empty anim index
                 emptyAnimIndexes.Add(childAnimIndex);
 
-
+				// Destroy Entity
 				commandBuffer.DestroyEntity(listEntities[childEntityIndex]);
 
-                GameObjectEntity.Destroy(destroyChildComponent.gameObject);
+				// Destroy Entity GO
+                GameObjectEntity.Destroy(destroyComponent.gameObject);
                 UpdateInjectedComponentGroups();
-				
-                EntryAnimation entryAnim = listAnim[childAnimIndex];
-                entryAnim.EndAnimationToggle = 1;
-
-                listAnim[childAnimIndex] = entryAnim;
-
-				GameDebug.Log(childEntityIndex);
 			}
         }
     }

@@ -67,6 +67,13 @@ namespace Javatale.Prototype
         MOVE_FLY
     }
 
+	public enum DamageType
+    {
+        NORMAL,
+        STUN,
+        KNOCKDOWN
+    }
+
 #region OLD
     // public struct EntryPlayerAnim
     // {

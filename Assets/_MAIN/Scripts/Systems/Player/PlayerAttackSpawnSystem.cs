@@ -111,14 +111,14 @@ namespace Javatale.Prototype
 					emptyAnimIndexes.RemoveAt(0);
 
 					//Set projectile list by its empty index
-					listAnim[emptyProjectileAnimIndex] = new EntryAnimation(attackFaceDirIndex, attackFaceValue, 1, 0); //START 1, END 0
+					listAnim[emptyProjectileAnimIndex] = new EntryAnimation(attackFaceDirIndex, attackFaceValue, 1); //START 1
 
 					//Set current index by its empty index
 					currentAnimListIndex = emptyProjectileAnimIndex;
 				}
 				else 
 				{
-					listAnim.Add(new EntryAnimation(attackFaceDirIndex, attackFaceValue, 1, 0)); //START 1, END 0
+					listAnim.Add(new EntryAnimation(attackFaceDirIndex, attackFaceValue, 1)); //START 1
 					
 					currentAnimListIndex = listAnim.Count-1;
 				}

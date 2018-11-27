@@ -4,6 +4,7 @@ namespace Javatale.Prototype
 {
 	public class DamageComponent : MonoBehaviour 
 	{
-		public float damageValue;
+		public float Value;
+		public DamageType Type;
 	}
 }

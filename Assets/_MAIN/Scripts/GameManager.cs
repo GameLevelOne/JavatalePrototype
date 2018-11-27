@@ -142,7 +142,7 @@ namespace Javatale.Prototype
 
 			float3 float3Zero = float3.zero;
 
-			manager.SetComponentData(playerEntity, new Player { State = PlayerAnimationState.IDLE_STAND, StartAnimationToggle = 1, EndAnimationToggle = 0 });
+			manager.SetComponentData(playerEntity, new Player { State = PlayerAnimationState.IDLE_STAND, StartAnimationToggle = 1 });
 			manager.SetComponentData(playerEntity, new PlayerInputDirection { Value = float3Zero });
 			manager.SetComponentData(playerEntity, new Position { Value = float3Zero });
 			manager.SetComponentData(playerEntity, new Rotation { Value = Quaternion.Euler(settings.worldToCameraRotation) });
@@ -164,8 +164,8 @@ namespace Javatale.Prototype
 
 			#region ANIMATION LIST
 			FaceDirection playerInitFaceDir = manager.GetComponentData<FaceDirection>(playerEntity);
-			//Add new EntryAnimation into Animation List (AnimationToggle = 1)
-			entitiesAnimation.Add(new EntryAnimation(playerInitFaceDir.dirIndex, playerInitFaceDir.Value, 1, 0));
+			//Add new EntryAnimation into Animation List (StartAnimationToggle = 1)
+			entitiesAnimation.Add(new EntryAnimation(playerInitFaceDir.dirIndex, playerInitFaceDir.Value, 1));
 			int currentAnimListIndex = entitiesAnimation.Count-1; //Get the last List Index in Animation List
 			#endregion
 
@@ -230,7 +230,7 @@ namespace Javatale.Prototype
 
 				#region ANIMATION LIST
 				FaceDirection enemyInitDir = manager.GetComponentData<FaceDirection>(entities[i]);
-				entitiesAnimation.Add(new EntryAnimation(enemyInitDir.dirIndex, enemyInitDir.Value, 1, 0));
+				entitiesAnimation.Add(new EntryAnimation(enemyInitDir.dirIndex, enemyInitDir.Value, 1));
 				int currentAnimListIndex = entitiesAnimation.Count-1; 
 				#endregion
 

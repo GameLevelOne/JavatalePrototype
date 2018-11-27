@@ -1,9 +1,9 @@
-﻿using System;
-using Unity.Entities;
-// using Unity.Mathematics;
-using UnityEngine;
+﻿// using System;
+// using Unity.Entities;
+// // using Unity.Mathematics;
+// using UnityEngine;
 
 
-namespace Javatale.Prototype 
-{
-}
+// namespace Javatale.Prototype 
+// {
+// }

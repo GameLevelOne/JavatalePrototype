@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Javatale.Prototype 
 {
-	public class EndAnimationChildComponent : MonoBehaviour 
+	public class EndAttackAnimationEventComponent : MonoBehaviour 
 	{
 		public int Value;
 	}

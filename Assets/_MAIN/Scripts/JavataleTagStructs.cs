@@ -7,7 +7,6 @@ namespace Javatale.Prototype
 {
 #region ==========TAG==========
 
-	// PLAYER
 	public struct Player : IComponentData
 	{
 		public int AnimStateIndex;
@@ -26,7 +25,7 @@ namespace Javatale.Prototype
 		/// <para>22 Attack 2<br /></para>
 		/// </summary>
 		public int StartAnimationToggle;
-		public int EndAnimationToggle;
+		// public int EndAnimationToggle;
 		public int AnimationToggleValue;
 		
 		/// <summary>
@@ -37,14 +36,13 @@ namespace Javatale.Prototype
 		/// </summary>
 		public int AttackIndex;
 	}
-	// public class PlayerComponent : ComponentDataWrapper<Player> {}
+	public class PlayerComponent : ComponentDataWrapper<Player> {}
 
-	// PROJECTILE
 	public struct Projectile : IComponentData
 	{
 		//
 	}
-	// public class ProjectileComponent : ComponentDataWrapper<Projectile> {}
+	public class ProjectileComponent : ComponentDataWrapper<Projectile> {}
 
 	// BEE
 	public struct Bee : IComponentData
@@ -60,56 +58,66 @@ namespace Javatale.Prototype
 		public float IdleTimer;
 		public float PatrolTimer;
 	}
-	// public class BeeComponent : ComponentDataWrapper<Bee> {}
-
-#endregion
-
-#region ANIMATION EVENT
-
-	// START
-	public struct StartAnimationEvent : IComponentData
-	{
-		public int Value;
-	}
-
-	// SPECIFIC EVENT
-	public struct SpecificAnimationEvent : IComponentData
-	{
-		public int Value;
-	}
-
-	// END
-	public struct EndAnimationEvent : IComponentData
-	{
-		public int Value;
-	}
+	public class BeeComponent : ComponentDataWrapper<Bee> {}
 
 #endregion
 
 #region ==========LIST==========
 
-	// ANIMATION LIST
 	public struct EntryAnimation 
     {
         public int DirIndex; //USELESS
         public float3 FaceDirValue;
         public int StartAnimationToggle;
-        public int EndAnimationToggle;
 
-        public EntryAnimation (int dirIndex, float3 faceDirValue, int startAnimToggle, int endAnimToggle)
+        public EntryAnimation (int dirIndex, float3 faceDirValue, int startAnimToggle)
         {
             DirIndex = dirIndex;
             FaceDirValue = faceDirValue;
             StartAnimationToggle = startAnimToggle;
-            EndAnimationToggle = endAnimToggle;
         }
     }
 
+	public struct EntryDamage : IComponentData 
+	{
+		public float Value;
+		public int Type;
+
+        public EntryDamage (float value, int type)
+        {
+            Value = value;
+            Type = type;
+        }
+	}
+
+#endregion
+
+#region ==========ANIMATION EVENT DATA==========
+
+	public struct StartAnimationData : IComponentData
+	{
+		public int Value;
+	}
+
+	public struct SpawnSomethingOnAnimationData : IComponentData
+	{
+		public int Value;
+	}
+
+	public struct EndAttackAnimationData : IComponentData
+	{
+		public int Value;
+	}
+
+	public struct EndAllAnimationData : IComponentData
+	{
+		public int Value;
+	}
+
 #endregion
 	
-#region ==========OTHER==========
+#region ==========DATA==========
 
-	// ATTACK
 	public struct PlayerAttackSpawnData : IComponentData
 	{
 		public Position pos;
@@ -121,14 +129,13 @@ namespace Javatale.Prototype
         public int attackIndex;
 	}
 
-	// DAMAGED
-	public struct Damaged : IComponentData
+	public struct DamagedData : IComponentData 
 	{
 		public float Value;
+		public int Type;
 	}
 
-	// DESTROYED
-	public struct Destroyed : IComponentData
+	public struct DestroyedData : IComponentData
 	{
 		//
 	}

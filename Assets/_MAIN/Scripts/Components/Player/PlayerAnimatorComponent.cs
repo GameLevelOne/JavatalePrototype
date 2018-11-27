@@ -14,7 +14,6 @@ namespace Javatale.Prototype
 
 		[HeaderAttribute("Current")]
 		public int currentDirIndex;
-		// public int currentPlayerStartAnimToggle;
 		public PlayerAnimationState currentState;
 		public float3 currentFaceDirValue;
 		
@@ -23,14 +22,14 @@ namespace Javatale.Prototype
 		public bool isFinishAttackAnimation = true;
 		public bool isCheckOnStartAnimation = false;
 		public bool isCheckOnSpawnSomethingOnAnimation = false;
-		public bool isCheckOnEndSpecificAnimation = false;
-		public bool isCheckOnEndAnimation = false;
+		public bool isCheckOnEndAttackAnimation = false;
+		public bool isCheckOnEndAllAnimation = false;
 
 		void OnEnable ()
 		{
 			animationEvent.OnStartAnimation += OnStartAnimation;
 			animationEvent.OnSpawnSomethingOnAnimation += OnSpawnSomethingOnAnimation;
-			animationEvent.OnEndSpecificAnimation += OnEndSpecificAnimation;
+			animationEvent.OnEndAttackAnimation += OnEndAttackAnimation;
 			animationEvent.OnEndAnimation += OnEndAnimation;
 		}
 
@@ -38,32 +37,53 @@ namespace Javatale.Prototype
 		{
 			animationEvent.OnStartAnimation -= OnStartAnimation;
 			animationEvent.OnSpawnSomethingOnAnimation -= OnSpawnSomethingOnAnimation;
-			animationEvent.OnEndSpecificAnimation -= OnEndSpecificAnimation;
+			animationEvent.OnEndAttackAnimation -= OnEndAttackAnimation;
 			animationEvent.OnEndAnimation -= OnEndAnimation;
 		}
 
 		void OnStartAnimation ()
 		{
-			isCheckOnStartAnimation = true;
+			if (!isCheckOnStartAnimation)
+			{
+				isCheckOnStartAnimation = true;
+
+				gameObject.AddComponent<StartAnimationEventComponent>().Value = 0;
+				entityGO.enabled = false;
+				entityGO.enabled = true;
+			}
 		}
 
 		void OnSpawnSomethingOnAnimation ()
 		{
-			isCheckOnSpawnSomethingOnAnimation = true;
+			if (!isCheckOnSpawnSomethingOnAnimation)
+			{
+				isCheckOnSpawnSomethingOnAnimation = true;
+
+				gameObject.AddComponent<SpawnSomethingOnAnimationEventComponent>().Value = 0;
+				entityGO.enabled = false;
+				entityGO.enabled = true;
+			}
 		}
 
-		void OnEndSpecificAnimation ()
+		void OnEndAttackAnimation ()
 		{
-			isCheckOnEndSpecificAnimation = true;
+			if (!isCheckOnEndAttackAnimation)
+			{
+				isCheckOnEndAttackAnimation = true;
+
+				gameObject.AddComponent<EndAttackAnimationEventComponent>().Value = 0;
+				entityGO.enabled = false;
+				entityGO.enabled = true;
+			}
 		}
 
 		void OnEndAnimation ()
 		{
-			if (!isCheckOnEndAnimation) 
+			if (!isCheckOnEndAllAnimation) 
 			{
-				isCheckOnEndAnimation = true;
-				
-				gameObject.AddComponent<EndAnimationChildComponent>().Value = 0;
+				isCheckOnEndAllAnimation = true;
+
+				gameObject.AddComponent<EndAllAnimationEventComponent>().Value = 0;
 				entityGO.enabled = false;
 				entityGO.enabled = true;
 			}

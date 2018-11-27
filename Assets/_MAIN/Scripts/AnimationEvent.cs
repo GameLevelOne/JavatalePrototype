@@ -7,7 +7,7 @@ namespace Javatale.Prototype
 		public delegate void AnimationControl();
 		public event AnimationControl OnStartAnimation;
 		public event AnimationControl OnSpawnSomethingOnAnimation;
-		public event AnimationControl OnEndSpecificAnimation;
+		public event AnimationControl OnEndAttackAnimation;
 		public event AnimationControl OnEndAnimation;
 
 		// public Animator animator;
@@ -30,11 +30,11 @@ namespace Javatale.Prototype
 			}
 		}
 
-		void EndSpecificAnimation ()
+		void EndAttackAnimation ()
 		{
-			if (OnEndSpecificAnimation != null)
+			if (OnEndAttackAnimation != null)
 			{
-				OnEndSpecificAnimation();
+				OnEndAttackAnimation();
 			}
 		}
 

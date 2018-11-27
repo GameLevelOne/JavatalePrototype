@@ -2,7 +2,7 @@
 
 namespace Javatale.Prototype
 {
-	#region Player
+	#region ========== PLAYER ==========
 	//IDLE STAND
 	public struct AnimationPlayerIdleStand : IComponentData {}
 	public class PlayerAnimationIdleComponent : ComponentDataWrapper<AnimationPlayerIdleStand> {}
@@ -22,9 +22,14 @@ namespace Javatale.Prototype
 	//ATTACK 3
 	public struct AnimationPlayerAttack3 : IComponentData {}
 	public class PlayerAnimationAttack3Component : ComponentDataWrapper<AnimationPlayerAttack3> {}
+
+	//ATTACK 3
+	public struct AnimationPlayerGetHurt : IComponentData {}
+	public class PlayerAnimationGetHurtComponent : ComponentDataWrapper<AnimationPlayerGetHurt> {}
+	
 	#endregion
 	
-	#region Bee
+	#region ========== BEE ==========
 	//IDLE FLY
 	public struct AnimationBeeIdleFly : IComponentData {}
 	public class BeeAnimationIdleComponent : ComponentDataWrapper<AnimationBeeIdleFly> {}

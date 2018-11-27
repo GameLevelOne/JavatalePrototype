@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Javatale.Prototype
 {
-	public class DestroyChildComponent : MonoBehaviour 
+	public class DestroyComponent : MonoBehaviour 
 	{
 		//
 	}

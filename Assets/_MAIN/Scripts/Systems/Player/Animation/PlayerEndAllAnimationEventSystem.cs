@@ -1,13 +1,13 @@
 using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
-using Unity.Mathematics;
+// using Unity.Mathematics;
 // using Unity.Burst;
 using System.Collections.Generic;
 
 namespace Javatale.Prototype 
 {
-	public class PlayerEndAnimationSystem : ComponentSystem 
+	public class PlayerEndAllAnimationEventSystem : ComponentSystem 
 	{
 		// [BurstCompileAttribute]
 		public struct Data
@@ -16,7 +16,7 @@ namespace Javatale.Prototype
 			[ReadOnlyAttribute] public EntityArray Entities;
 			[ReadOnlyAttribute] public ComponentArray<ChildComponent> Child;
 			public ComponentArray<PlayerAnimatorComponent> PlayerAnimatorComponent;
-			public ComponentArray<EndAnimationChildComponent> EndAnimationChildComponent;
+			public ComponentArray<EndAllAnimationEventComponent> EndAllAnimationEventComponent;
 		}
 		[InjectAttribute] private Data data;
 
@@ -26,26 +26,24 @@ namespace Javatale.Prototype
 		{
 			EntityCommandBuffer commandBuffer = PostUpdateCommands;
 			List<Entity> entitiesInGame = GameManager.entitiesInGame;
-            
-			int maxPlayerAttackIndex = GameManager.settings.maxPlayerAttackIndex;
 
 			for (int i=0; i<data.Length; i++)
 			{
 				Entity entity = data.Entities[i];
 				ChildComponent child = data.Child[i];
                 PlayerAnimatorComponent playerAnimatorComponent = data.PlayerAnimatorComponent[i];
-                EndAnimationChildComponent endAnimChildComponent = data.EndAnimationChildComponent[i];
+                EndAllAnimationEventComponent endAllAnimationEventComponent = data.EndAllAnimationEventComponent[i];
 
-				int childEntityIndex = child.EntityIndex;
-				int endAnimValue = endAnimChildComponent.Value;
+				int entityIndex = child.EntityIndex;
+				int endAnimValue = endAllAnimationEventComponent.Value;
 
-                commandBuffer.RemoveComponent<EndAnimationChildComponent>(entity);
-				GameObject.Destroy(endAnimChildComponent);
+                commandBuffer.RemoveComponent<EndAllAnimationEventComponent>(entity);
+				GameObject.Destroy(endAllAnimationEventComponent);
                 UpdateInjectedComponentGroups();
 
-				commandBuffer.AddComponent(entitiesInGame[childEntityIndex], new EndAnimationEvent{ Value = endAnimValue});
+				commandBuffer.AddComponent(entitiesInGame[entityIndex], new EndAllAnimationData{ Value = endAnimValue });
 
-                playerAnimatorComponent.isCheckOnEndAnimation = false;
+                playerAnimatorComponent.isCheckOnEndAllAnimation = false;
             }
 		}	
 	}
