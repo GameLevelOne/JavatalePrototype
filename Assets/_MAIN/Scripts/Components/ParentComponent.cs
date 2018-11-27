@@ -7,6 +7,7 @@ namespace Javatale.Prototype
 	[SerializableAttribute]
 	public struct Parent : IComponentData 
 	{
+		public int EntityIndex;
 		public int PosIndex;
 		public int AnimIndex;
 	}

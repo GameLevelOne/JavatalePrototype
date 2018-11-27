@@ -1,5 +1,5 @@
-﻿// using System;
-// using Unity.Entities;
+﻿// using System.Collections.Generic;
+using Unity.Entities;
 using UnityEngine;
 // using Unity.Transforms;
 using Unity.Mathematics;
@@ -8,6 +8,7 @@ namespace Javatale.Prototype
 {
 	public class PlayerAnimatorComponent : MonoBehaviour 
 	{
+		public GameObjectEntity entityGO;
 		public Animator animator;
 		public AnimationEvent animationEvent;
 
@@ -24,7 +25,6 @@ namespace Javatale.Prototype
 		public bool isCheckOnSpawnSomethingOnAnimation = false;
 		public bool isCheckOnEndSpecificAnimation = false;
 		public bool isCheckOnEndAnimation = false;
-
 
 		void OnEnable ()
 		{
@@ -59,7 +59,14 @@ namespace Javatale.Prototype
 
 		void OnEndAnimation ()
 		{
-			isCheckOnEndAnimation = true;
+			if (!isCheckOnEndAnimation) 
+			{
+				isCheckOnEndAnimation = true;
+				
+				gameObject.AddComponent<EndAnimationChildComponent>().Value = 0;
+				entityGO.enabled = false;
+				entityGO.enabled = true;
+			}
 		}
 	}
 }

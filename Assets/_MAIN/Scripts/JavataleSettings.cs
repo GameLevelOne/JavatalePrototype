@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 // using Unity.Rendering;
 using Unity.Entities;
-using Unity.Transforms;
 using Unity.Mathematics;
 
 namespace Javatale.Prototype
@@ -66,53 +65,6 @@ namespace Javatale.Prototype
     {
         IDLE_FLY,
         MOVE_FLY
-    }
-
-	public struct PlayerAttackSpawnData : IComponentData
-	{
-		public Position pos;
-		public Rotation rot;
-		public MoveDirection moveDir;
-		public FaceDirection faceDir;
-        public Parent parent;
-        public Projectile projectile;
-        public int attackIndex;
-	}
-
-    public struct EntryAnimation 
-    {
-        public int DirIndex; //USELESS
-        public float3 FaceDirValue;
-        public int StartAnimationToggle;
-        public int EndAnimationToggle;
-
-        public EntryAnimation (int dirIndex, float3 faceDirValue, int startAnimToggle, int endAnimToggle)
-        {
-            DirIndex = dirIndex;
-            FaceDirValue = faceDirValue;
-            StartAnimationToggle = startAnimToggle;
-            EndAnimationToggle = endAnimToggle;
-        }
-    }
-
-    public struct EntryPlayerAnimState
-    {
-        public PlayerAnimationState State;
-
-        public EntryPlayerAnimState (PlayerAnimationState state)
-        {
-            State = state;
-        }
-    }
-
-    public struct EntryBeeAnimState
-    {
-        public BeeAnimationState State;
-
-        public EntryBeeAnimState (BeeAnimationState state)
-        {
-            State = state;
-        }
     }
 
 #region OLD

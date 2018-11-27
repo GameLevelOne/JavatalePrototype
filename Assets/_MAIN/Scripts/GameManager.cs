@@ -20,14 +20,14 @@ namespace Javatale.Prototype
 		public static JavataleSettings settings;
 
 		#region Universal Lists
+		public static List<Entity> entitiesInGame;
 		public static List<float3> entitiesPos;
-		// public static List<bool> entitiesDamage;
 		public static List<EntryAnimation> entitiesAnimation;
 		#endregion
 
 		#region Specific Entity Lists
-		public static List<EntryPlayerAnimState> entitiesPlayerAnimState;
-		public static List<EntryBeeAnimState> entitiesBeeAnimState;
+		public static List<PlayerAnimationState> entitiesPlayerAnimState;
+		public static List<BeeAnimationState> entitiesBeeAnimState;
 		#endregion
 
 		// public static List<EntryPlayerAnim> entitiesPlayerAnim;
@@ -35,6 +35,7 @@ namespace Javatale.Prototype
 		// public static List<EntryBeeAnim> entitiesBeeAnim;
 
 		#region Empty List
+		public static List<int> emptyEntitiesIndexes;
 		public static List<int> emptyPosIndexes;
 		public static List<int> emptyAnimIndexes;
 		#endregion
@@ -74,14 +75,17 @@ namespace Javatale.Prototype
 				typeof(PlayerAttackSpawnData)
 			);
 
+			// UNIVERSAL
+			entitiesInGame = new List<Entity>();
 			entitiesPos = new List<float3>();
 			entitiesAnimation = new List<EntryAnimation>();
-			entitiesPlayerAnimState = new List<EntryPlayerAnimState>();
-			entitiesBeeAnimState = new List<EntryBeeAnimState>();
-			// entitiesPlayerAnim = new List<EntryPlayerAnim>();
-			// entitiesProjectileAnim = new List<EntryProjectileAnim>();
-			// entitiesBeeAnim = new List<EntryBeeAnim>();
 
+			// SPECIFIC
+			entitiesPlayerAnimState = new List<PlayerAnimationState>();
+			entitiesBeeAnimState = new List<BeeAnimationState>();
+
+			// EMPTY
+			emptyEntitiesIndexes = new List<int>();
 			emptyPosIndexes = new List<int>();
 			emptyAnimIndexes = new List<int>();
 		}
@@ -146,6 +150,11 @@ namespace Javatale.Prototype
 			manager.SetComponentData(playerEntity, new FaceDirection { Value = float3Zero, dirIndex = 0 });
 			manager.SetComponentData(playerEntity, new MoveSpeed { Value = settings.playerMoveSpeed });
 
+			#region ENTITY LIST
+			entitiesInGame.Add(playerEntity);
+			int currentEntitiesInGameListIndex = entitiesInGame.Count-1;
+			#endregion
+
 			#region POS LIST
 			Position playerInitPos = manager.GetComponentData<Position>(playerEntity);
 			//Add new Position into Pos List
@@ -162,19 +171,16 @@ namespace Javatale.Prototype
 
 			#region PLAYER ANIMATION STATE LIST
 			//Add new EntryPlayerAnimState into Player Animation State List (IDLE_STAND)
-			entitiesPlayerAnimState.Add(new EntryPlayerAnimState(PlayerAnimationState.IDLE_STAND));
+			entitiesPlayerAnimState.Add(PlayerAnimationState.IDLE_STAND);
 			int currentPlayerAnimStateListIndex = entitiesPlayerAnimState.Count-1;//Get the last List Index in Player Animation State List
 			#endregion
 
-			//OLD
-			// entitiesPlayerAnim.Add(new EntryPlayerAnim(playerInitFaceDir.dirIndex, playerInitFaceDir.Value, PlayerAnimationState.IDLE_STAND, 1, 0));
-			// int currentAnimListIndex = entitiesPlayerAnim.Count-1; //Get last List Index to Anim List
-
 			//Set All List Index to parent IComponentData and its child Component
-			manager.SetComponentData(playerEntity, new Parent { PosIndex = currentPosListIndex, AnimIndex = currentAnimListIndex });
+			manager.SetComponentData(playerEntity, new Parent { EntityIndex = currentEntitiesInGameListIndex, PosIndex = currentPosListIndex, AnimIndex = currentAnimListIndex });
 			manager.SetComponentData(playerEntity, new Player { AnimStateIndex = currentPlayerAnimStateListIndex });
 
 			GameObject playerGO = GameObject.Instantiate(settings.playerChild, playerInitPos.Value, quaternion.identity);
+			playerGO.GetComponent<ChildComponent>().EntityIndex = currentEntitiesInGameListIndex;
 			playerGO.GetComponent<ChildComponent>().PosIndex = currentPosListIndex;
 			playerGO.GetComponent<ChildComponent>().AnimIndex = currentAnimListIndex;
 		}
@@ -211,6 +217,11 @@ namespace Javatale.Prototype
 				// 	material = settings.enemyMaterial
 				// });
 
+				#region ENTITY LIST
+				entitiesInGame.Add(entities[i]);
+				int currentEntitiesInGameListIndex = entitiesInGame.Count-1;
+				#endregion
+
 				#region POSITION LIST
 				Position enemyInitPos = manager.GetComponentData<Position>(entities[i]);
 				entitiesPos.Add(enemyInitPos.Value); 
@@ -224,7 +235,7 @@ namespace Javatale.Prototype
 				#endregion
 
 				#region BEE ANIMATION STATE LIST
-				entitiesBeeAnimState.Add(new EntryBeeAnimState(BeeAnimationState.IDLE_FLY));
+				entitiesBeeAnimState.Add(BeeAnimationState.IDLE_FLY);
 				int currentBeeAnimStateListIndex = entitiesBeeAnimState.Count-1;
 				#endregion
 
@@ -232,10 +243,11 @@ namespace Javatale.Prototype
 				// entitiesBeeAnim.Add(new EntryBeeAnim(enemyInitDir.dirIndex, BeeAnimationState.IDLE_FLY)); //Add Entity Animation State to List
 				// int currentAnimListIndex = entitiesBeeAnim.Count-1; //Get last List Index to Anim List
 
-				manager.SetComponentData(entities[i], new Parent { PosIndex = currentPosListIndex, AnimIndex = currentAnimListIndex });
+				manager.SetComponentData(entities[i], new Parent { EntityIndex = currentEntitiesInGameListIndex, PosIndex = currentPosListIndex, AnimIndex = currentAnimListIndex });
 				manager.SetComponentData(entities[i], new Bee { AnimStateIndex = currentBeeAnimStateListIndex });
 
 				GameObject enemyGO = GameObject.Instantiate(settings.beeEnemyChild, enemyInitPos.Value, quaternion.identity);
+				enemyGO.GetComponent<ChildComponent>().EntityIndex = currentEntitiesInGameListIndex;
 				enemyGO.GetComponent<ChildComponent>().PosIndex = currentPosListIndex;
 				enemyGO.GetComponent<ChildComponent>().AnimIndex = currentAnimListIndex;
 			}

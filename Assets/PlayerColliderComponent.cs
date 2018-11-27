@@ -29,7 +29,7 @@ namespace Javatale.Prototype
 			// DamageThisChildComponent damageThisChildComponent = new DamageThisChildComponent();
 			// damageThisChildComponent.damageValue = damageValue;
 			
-			gameObject.AddComponent<DamageThisChildComponent>().damageValue = damageValue;
+			gameObject.AddComponent<DamageChildComponent>().Value = damageValue;
 			entityGO.enabled = false;
 			entityGO.enabled = true;
 		}

@@ -25,7 +25,7 @@ namespace Javatale.Prototype
 		{
 			EntityCommandBuffer commandBuffer = PostUpdateCommands;
 			List<EntryAnimation> listAnim = GameManager.entitiesAnimation;
-			List<EntryBeeAnimState> listBeeAnimState = GameManager.entitiesBeeAnimState;
+			List<BeeAnimationState> listBeeAnimState = GameManager.entitiesBeeAnimState;
 
 			for (int i=0; i<parentData.Length; i++) {
 				Entity animEntity = parentData.AnimationIdleEntities[i];
@@ -46,10 +46,10 @@ namespace Javatale.Prototype
 				BeeAnimationState state = BeeAnimationState.MOVE_FLY;
 
 				int beeAnimStateIndex = bee.AnimStateIndex;
-				EntryBeeAnimState entryBeeAnimState = listBeeAnimState[beeAnimStateIndex];
-				entryBeeAnimState.State = state;
+				// EntryBeeAnimState entryBeeAnimState = listBeeAnimState[beeAnimStateIndex];
+				// entryBeeAnimState.State = state;
 
-				listBeeAnimState[beeAnimStateIndex] = entryBeeAnimState;
+				listBeeAnimState[beeAnimStateIndex] = state;
 
 				//SET TO BEE (PARENT)	
 				// bee.AttackIndex = 0;	

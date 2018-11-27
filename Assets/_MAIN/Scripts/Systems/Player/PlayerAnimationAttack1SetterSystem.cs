@@ -26,7 +26,7 @@ namespace Javatale.Prototype
 			EntityCommandBuffer commandBuffer = PostUpdateCommands;
 			List<EntryAnimation> listAnim = GameManager.entitiesAnimation;
             // List<EntryPlayerAnim> listAnim = GameManager.entitiesPlayerAnim;
-			List<EntryPlayerAnimState> listPlayerAnimState = GameManager.entitiesPlayerAnimState;
+			List<PlayerAnimationState> listPlayerAnimState = GameManager.entitiesPlayerAnimState;
 
 			for (int i=0; i<parentData.Length; i++) {
 				Entity animEntity = parentData.AnimationIdleEntities[i];
@@ -49,10 +49,10 @@ namespace Javatale.Prototype
 				PlayerAnimationState state = PlayerAnimationState.ATTACK_1;
 
 				int playerAnimStateIndex = player.AnimStateIndex;
-				EntryPlayerAnimState entryPlayerAnimState = listPlayerAnimState[playerAnimStateIndex];
-				entryPlayerAnimState.State = state;
+				// EntryPlayerAnimState entryPlayerAnimState = listPlayerAnimState[playerAnimStateIndex];
+				// entryPlayerAnimState.State = state;
 				
-				listPlayerAnimState[playerAnimStateIndex] = entryPlayerAnimState;
+				listPlayerAnimState[playerAnimStateIndex] = state;
 
 				//SET TO PLAYER (PARENT)
 				player.AnimationToggleValue = 1;

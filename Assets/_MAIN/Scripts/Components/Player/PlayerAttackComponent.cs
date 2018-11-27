@@ -20,7 +20,7 @@ namespace Javatale.Prototype
 
 		void OnEndAnimation ()
 		{
-			gameObject.AddComponent<DestroyThisChildComponent>();
+			gameObject.AddComponent<DestroyChildComponent>();
 			entityGO.enabled = false;
 			entityGO.enabled = true;
 		}

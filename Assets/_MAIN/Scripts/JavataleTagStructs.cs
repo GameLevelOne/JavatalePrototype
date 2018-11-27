@@ -1,10 +1,13 @@
 using Unity.Entities;
 using UnityEngine;
-
+using Unity.Transforms;
+using Unity.Mathematics;
 
 namespace Javatale.Prototype 
 {
-	//PLAYER
+#region ==========TAG==========
+
+	// PLAYER
 	public struct Player : IComponentData
 	{
 		public int AnimStateIndex;
@@ -34,23 +37,16 @@ namespace Javatale.Prototype
 		/// </summary>
 		public int AttackIndex;
 	}
-	public class PlayerComponent : ComponentDataWrapper<Player> {}
+	// public class PlayerComponent : ComponentDataWrapper<Player> {}
 
-	//PROJECTILE
+	// PROJECTILE
 	public struct Projectile : IComponentData
 	{
 		//
 	}
-	public class ProjectileComponent : ComponentDataWrapper<Projectile> {}
-    
-	//DESTROYED
-	// public struct Destroyed : IComponentData
-	// {
-	// 	//
-	// }
-	// public class DestroyThisParentComponent : ComponentDataWrapper<Destroyed> {}
+	// public class ProjectileComponent : ComponentDataWrapper<Projectile> {}
 
-	//BEE
+	// BEE
 	public struct Bee : IComponentData
 	{
 		public int AnimStateIndex;
@@ -64,5 +60,79 @@ namespace Javatale.Prototype
 		public float IdleTimer;
 		public float PatrolTimer;
 	}
-	public class BeeComponent : ComponentDataWrapper<Bee> {}
+	// public class BeeComponent : ComponentDataWrapper<Bee> {}
+
+#endregion
+
+#region ANIMATION EVENT
+
+	// START
+	public struct StartAnimationEvent : IComponentData
+	{
+		public int Value;
+	}
+
+	// SPECIFIC EVENT
+	public struct SpecificAnimationEvent : IComponentData
+	{
+		public int Value;
+	}
+
+	// END
+	public struct EndAnimationEvent : IComponentData
+	{
+		public int Value;
+	}
+
+#endregion
+
+#region ==========LIST==========
+
+	// ANIMATION LIST
+	public struct EntryAnimation 
+    {
+        public int DirIndex; //USELESS
+        public float3 FaceDirValue;
+        public int StartAnimationToggle;
+        public int EndAnimationToggle;
+
+        public EntryAnimation (int dirIndex, float3 faceDirValue, int startAnimToggle, int endAnimToggle)
+        {
+            DirIndex = dirIndex;
+            FaceDirValue = faceDirValue;
+            StartAnimationToggle = startAnimToggle;
+            EndAnimationToggle = endAnimToggle;
+        }
+    }
+
+#endregion
+	
+#region ==========OTHER==========
+
+	// ATTACK
+	public struct PlayerAttackSpawnData : IComponentData
+	{
+		public Position pos;
+		public Rotation rot;
+		public MoveDirection moveDir;
+		public FaceDirection faceDir;
+        public Parent parent;
+        public Projectile projectile;
+        public int attackIndex;
+	}
+
+	// DAMAGED
+	public struct Damaged : IComponentData
+	{
+		public float Value;
+	}
+
+	// DESTROYED
+	public struct Destroyed : IComponentData
+	{
+		//
+	}
+
+#endregion
+
 }

@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ebd89242f8d4f549800d2937ecd21d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityGO: {fileID: 114560925217324048}
   animator: {fileID: 95854282769582188}
   animationEvent: {fileID: 114464707782508466}
   currentDirIndex: 0
@@ -223,6 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 467e7512a58e7ec44a56e7b2c7cbaa11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EntityIndex: 0
   PosIndex: 0
   AnimIndex: 0
   AnimStateIndex: 0

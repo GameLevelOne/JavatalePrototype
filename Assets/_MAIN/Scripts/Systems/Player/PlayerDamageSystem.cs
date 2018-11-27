@@ -1,7 +1,7 @@
 using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
-using Unity.Mathematics;
+// using Unity.Mathematics;
 using Unity.Burst;
 using System.Collections.Generic;
 
@@ -9,59 +9,37 @@ namespace Javatale.Prototype
 {
 	public class PlayerDamageSystem : ComponentSystem 
 	{
-        // [BurstCompileAttribute]
-		// public struct ParentData 
-		// {
-		// 	public readonly int Length;
-		// 	[ReadOnlyAttribute] public ComponentDataArray<Parent> Parent;
-        //     //
-		// }
-		// [InjectAttribute] ParentData parentData;
 		
         [BurstCompileAttribute]
-		public struct ChildData 
+		public struct Data 
 		{
 			public readonly int Length;
 			[ReadOnlyAttribute] public EntityArray Entities;
 			[ReadOnlyAttribute] public ComponentArray<ChildComponent> Child;
-            public ComponentArray<PlayerColliderComponent> PlayerColliderComponent;
-            public ComponentArray<DamageThisChildComponent> DamageThisChildComponent;
+            [ReadOnlyAttribute] public ComponentArray<PlayerColliderComponent> PlayerColliderComponent;
+            public ComponentArray<DamageChildComponent> DamageChildComponent;
 		}
-		[InjectAttribute] ChildData childData;
+		[InjectAttribute] Data data;
 
 		protected override void OnUpdate () 
 		{
 			EntityCommandBuffer commandBuffer = PostUpdateCommands;
+			List<Entity> entitiesInGame = GameManager.entitiesInGame;
 
-			// for (int i=0; i<parentData.Length; i++) 
-			// {
-			// 	Parent parent = parentData.Parent[i];
-                
-            //     //
-			// }
-
-			for (int j=0; j<childData.Length; j++) 
+			for (int i=0; i<data.Length; i++) 
 			{
-				Entity entity = childData.Entities[j];
-				ChildComponent child = childData.Child[j];
-                PlayerColliderComponent playerColliderComponent = childData.PlayerColliderComponent[j];
-				DamageThisChildComponent damageThisChildComponent = childData.DamageThisChildComponent[j];
+				Entity entity = data.Entities[i];
+				ChildComponent child = data.Child[i];
+				DamageChildComponent damageChildComponent = data.DamageChildComponent[i];
                 
-                int childAnimIndex = child.AnimIndex;
-                bool isInitDamaged = playerColliderComponent.isInitDamaged;
+				int childEntityIndex = child.EntityIndex;
+				float damageValue = damageChildComponent.Value;
 
-				commandBuffer.RemoveComponent<DamageThisChildComponent>(entity);
-				GameObject.Destroy(damageThisChildComponent);
+				commandBuffer.RemoveComponent<DamageChildComponent>(entity);
+				GameObject.Destroy(damageChildComponent);
                 UpdateInjectedComponentGroups();
 
-				GameDebug.Log("PLAYER DAMAGED");
-
-                // if (isInitDamaged)
-                // {
-                //     //
-
-                //     playerColliderComponent.isInitDamaged = false;
-                // }
+				commandBuffer.AddComponent(entitiesInGame[childEntityIndex], new Damaged{ Value = damageValue});
 			}
 		}
 	}

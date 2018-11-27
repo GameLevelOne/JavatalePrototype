@@ -21,8 +21,7 @@ namespace Javatale.Prototype
 		}
 		[InjectAttribute] private Data data;
 
-		// Vector3 vector3Zero = Vector3.zero;
-		float3 float3Zero = float3.zero;
+		// float3 float3Zero = float3.zero;
 
 		protected override void OnUpdate () 
 		{
@@ -37,13 +36,12 @@ namespace Javatale.Prototype
 				FaceDirection faceDir = data.FaceDirection[i];
 				Parent parent = data.Parent[i];
 
-				// Vector3 direction = moveDir.Value;
 				int animIndex = parent.AnimIndex;
 				EntryAnimation entryAnim = listAnim[animIndex];
 				
 				int beeStartAnimToggle = bee.StartAnimationToggle;
-				int beeEndAnimToggle = bee.EndAnimationToggle;
-				int beeAnimToggleValue = bee.AnimationToggleValue;
+				// int beeEndAnimToggle = bee.EndAnimationToggle;
+				// int beeAnimToggleValue = bee.AnimationToggleValue;
 
 				if (beeStartAnimToggle != 0) 
 				{

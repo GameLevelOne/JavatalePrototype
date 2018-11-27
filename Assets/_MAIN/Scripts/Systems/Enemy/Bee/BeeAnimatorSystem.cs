@@ -21,7 +21,7 @@ namespace Javatale.Prototype
 		protected override void OnUpdate () 
 		{
             List<EntryAnimation> listAnim = GameManager.entitiesAnimation;
-            List<EntryBeeAnimState> listBeeAnimState = GameManager.entitiesBeeAnimState;
+            List<BeeAnimationState> listBeeAnimState = GameManager.entitiesBeeAnimState;
 			
 			string faceX = Constants.AnimatorParameter.Float.FACE_X;
 			string faceY = Constants.AnimatorParameter.Float.FACE_Y;
@@ -36,8 +36,8 @@ namespace Javatale.Prototype
 				float3 faceDirValue = entryAnim.FaceDirValue;
 				
 				int childBeeAnimStateIndex = child.AnimStateIndex;
-				EntryBeeAnimState entryBeeAnimState = listBeeAnimState[childBeeAnimStateIndex];
-				BeeAnimationState state = entryBeeAnimState.State;
+				// EntryBeeAnimState entryBeeAnimState = listBeeAnimState[childBeeAnimStateIndex];
+				BeeAnimationState state = listBeeAnimState[childBeeAnimStateIndex];
 
 				// int dirIndex = entryAnim.DirIndex;
 				// int currentDirIndex = anim.currentDirIndex;

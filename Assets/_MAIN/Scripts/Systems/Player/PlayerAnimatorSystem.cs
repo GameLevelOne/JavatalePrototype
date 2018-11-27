@@ -31,7 +31,7 @@ namespace Javatale.Prototype
 		{
 			List<EntryAnimation> listAnim = GameManager.entitiesAnimation;
             // List<EntryPlayerAnim> listAnim = GameManager.entitiesPlayerAnim;
-			List<EntryPlayerAnimState> listPlayerAnimState = GameManager.entitiesPlayerAnimState;
+			List<PlayerAnimationState> listPlayerAnimState = GameManager.entitiesPlayerAnimState;
 
 			for (int i=0; i<parentData.Length; i++)
 			{
@@ -64,8 +64,8 @@ namespace Javatale.Prototype
 				float3 faceDirValue = entryAnim.FaceDirValue;
 
 				int childAnimStateIndex = child.AnimStateIndex;
-				EntryPlayerAnimState entryPlayerAnimState = listPlayerAnimState[childAnimStateIndex];
-				PlayerAnimationState state = entryPlayerAnimState.State;
+				// EntryPlayerAnimState entryPlayerAnimState = listPlayerAnimState[childAnimStateIndex];
+				PlayerAnimationState state = listPlayerAnimState[childAnimStateIndex];
 
 #region PLAY & STOP ANIMATION
 				int playerStartAnimToggle = entryAnim.StartAnimationToggle;
@@ -78,22 +78,22 @@ namespace Javatale.Prototype
 					entryAnim.StartAnimationToggle = 0;
 					listAnim[childAnimIndex] = entryAnim;
 				}
-				else 
-				{
-					if (anim.isCheckOnEndAnimation) {
-						entryAnim.EndAnimationToggle = 1;
-						listAnim[childAnimIndex] = entryAnim;
+				// else 
+				// {
+				// 	if (anim.isCheckOnEndAnimation) {
+				// 		entryAnim.EndAnimationToggle = 1;
+				// 		listAnim[childAnimIndex] = entryAnim;
 
-						anim.isCheckOnEndAnimation = false;
-					}
+				// 		anim.isCheckOnEndAnimation = false;
+				// 	}
 
-					if (anim.isCheckOnEndSpecificAnimation) {
-						entryAnim.EndAnimationToggle = 2;
-						listAnim[childAnimIndex] = entryAnim;
+				// 	if (anim.isCheckOnEndSpecificAnimation) {
+				// 		entryAnim.EndAnimationToggle = 2;
+				// 		listAnim[childAnimIndex] = entryAnim;
 
-						anim.isCheckOnEndSpecificAnimation = false;
-					}
-				}
+				// 		anim.isCheckOnEndSpecificAnimation = false;
+				// 	}
+				// }
 #endregion
 				
 #region DIRECTION

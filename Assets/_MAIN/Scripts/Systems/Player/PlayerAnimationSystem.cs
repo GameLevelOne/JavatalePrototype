@@ -111,41 +111,41 @@ namespace Javatale.Prototype
 				}
 #endregion 
 
-#region END ANIMATION
-				else if (playerEndAnimToggle != 0) 
-				{
-					switch (playerEndAnimToggle) 
-					{
-						case 1:				
-							if (playerAnimToggleValue == 0)
-								commandBuffer.AddComponent(animEntity, new AnimationPlayerIdleStand{});
+// #region END ANIMATION
+// 				else if (playerEndAnimToggle != 0) 
+// 				{
+// 					switch (playerEndAnimToggle) 
+// 					{
+// 						case 1:				
+// 							if (playerAnimToggleValue == 0)
+// 								commandBuffer.AddComponent(animEntity, new AnimationPlayerIdleStand{});
 							
-							break;
-						case 2:
-							commandBuffer.AddComponent(animEntity, new PlayerInputDirection{});
-							commandBuffer.AddComponent(animEntity, new PlayerInputAttack{});
+// 							break;
+// 						case 2:
+// 							commandBuffer.AddComponent(animEntity, new PlayerInputDirection{});
+// 							commandBuffer.AddComponent(animEntity, new PlayerInputAttack{});
 
-							int attackIndex = player.AttackIndex >= maxPlayerAttackIndex ? 0 : player.AttackIndex+1;
-							player.AttackIndex = attackIndex;
-							player.AnimationToggleValue = 0;
-							// data.Player[i] = player;
+// 							int attackIndex = player.AttackIndex >= maxPlayerAttackIndex ? 0 : player.AttackIndex+1;
+// 							player.AttackIndex = attackIndex;
+// 							player.AnimationToggleValue = 0;
+// 							// data.Player[i] = player;
 							
-							break;
-					}
+// 							break;
+// 					}
                 
-					//SET LIST
-					// int startAnimToggle = listAnim[animIndex].StartAnimationToggle;
-					// entryPlayerAnim.State = state;
-					entryAnim.EndAnimationToggle = 0;
+// 					//SET LIST
+// 					// int startAnimToggle = listAnim[animIndex].StartAnimationToggle;
+// 					// entryPlayerAnim.State = state;
+// 					entryAnim.EndAnimationToggle = 0;
 
-					// listAnim[animIndex] = new EntryPlayerAnim(dirIndex, faceDirValue, state, startAnimToggle, 0);
-					listAnim[animIndex] = entryAnim;	
+// 					// listAnim[animIndex] = new EntryPlayerAnim(dirIndex, faceDirValue, state, startAnimToggle, 0);
+// 					listAnim[animIndex] = entryAnim;	
 
-					//SET TO PLAYER (PARENT)						
-					player.EndAnimationToggle = 0;
-					data.Player[i] = player;
-				}
-#endregion
+// 					//SET TO PLAYER (PARENT)						
+// 					player.EndAnimationToggle = 0;
+// 					data.Player[i] = player;
+// 				}
+// #endregion
 			}
 		}	
 	}

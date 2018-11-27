@@ -26,9 +26,11 @@ namespace Javatale.Prototype
 			JavataleSettings settings = GameManager.settings;
 			// Mesh playerAttackMesh = settings.playerAttackMesh;
 			// Material[] playerAttackMaterials = settings.playerAttackMaterials;
+			List<Entity> listEntities = GameManager.entitiesInGame;
            	List<float3> listPos = GameManager.entitiesPos;
            	List<EntryAnimation> listAnim = GameManager.entitiesAnimation;
 			   
+			List<int> emptyEntitiesIndexes = GameManager.emptyEntitiesIndexes;
 			List<int> emptyPosIndexes = GameManager.emptyPosIndexes;
            	List<int> emptyAnimIndexes = GameManager.emptyAnimIndexes;
 			
@@ -52,6 +54,26 @@ namespace Javatale.Prototype
 				commandBuffer.AddComponent(playerAttackEntity, attackInitFaceDir);
 				commandBuffer.AddComponent(playerAttackEntity, attackParent);
 				commandBuffer.AddComponent(playerAttackEntity, attackProjectile);
+
+				#region ENTITY LIST
+				int currentEntityListIndex = 0;
+
+				if (emptyEntitiesIndexes.Count > 0)
+				{
+					int emptyEntityIndex = emptyEntitiesIndexes[0];
+					emptyEntitiesIndexes.RemoveAt(0);
+
+					listEntities[emptyEntityIndex] = playerAttackEntity;
+
+					currentEntityListIndex = emptyEntityIndex;
+				}
+				else 
+				{
+					listEntities.Add(playerAttackEntity);
+					
+					currentEntityListIndex = listPos.Count-1;
+				}
+				#endregion
 
 				#region POS LIST
 				float3 attackPosValue = attackInitPos.Value;
@@ -103,6 +125,7 @@ namespace Javatale.Prototype
 				#endregion
 
 				commandBuffer.SetComponent<Parent>(playerAttackEntity, new Parent{
+					EntityIndex = currentEntityListIndex,
 					PosIndex = currentPosListIndex,	
 					AnimIndex = currentAnimListIndex
 				});
@@ -123,6 +146,7 @@ namespace Javatale.Prototype
 						break;
 				}
 				
+				attackGO.GetComponent<ChildComponent>().EntityIndex = currentEntityListIndex;
 				attackGO.GetComponent<ChildComponent>().PosIndex = currentPosListIndex;
 				attackGO.GetComponent<ChildComponent>().AnimIndex = currentAnimListIndex;
 
